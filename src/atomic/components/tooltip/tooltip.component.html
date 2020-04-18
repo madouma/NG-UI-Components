@@ -1,0 +1,22 @@
+<ng-template
+  #overlay="cdkConnectedOverlay"
+  cdkConnectedOverlay
+  [cdkConnectedOverlayOrigin]="overlayOrigin"
+  [cdkConnectedOverlayOpen]="visible"
+  [cdkConnectedOverlayHasBackdrop]="false"
+  [cdkConnectedOverlayLockPosition]="true"
+  [cdkConnectedOverlayPush]="false"
+  [cdkConnectedOverlayPositions]="positions"
+  cdkConnectedOverlayPanelClass="h2-tooltip-pane"
+  (positionChange)="onPositionChange($event)"
+  (detach)="hide()">
+  <div class="h2-tooltip" *ngIf="content" [ngClass]="[placement, type]" [@tooltipAnimation]="visible">
+    <div class="h2-tooltip-arrow"></div>
+    <div class="h2-tooltip-content">
+      <ng-container *ngIf="contentIsTemplate; else textOnly   ">
+        <ng-container [ngTemplateOutlet]="content"></ng-container>
+      </ng-container>
+      <ng-template #textOnly>{{ content }}</ng-template>
+    </div>
+  </div>
+</ng-template>

@@ -1,0 +1,21 @@
+<div class="h2-properties-bar-header" [class.h2--collapse-enabled]="enableCollapse" (click)="collapsed = !collapsed"
+    *ngIf="text">
+    <span class="h2-properties-bar-text h2-font-h3">{{text}}</span>
+
+    <h2-visibility-switch *ngIf="enableVisibilitySwitch" [(ngModel)]="visible" [disabled]="disabled"
+        (ngModelChange)="onVisibilityChange($event)" (click)="$event.stopPropagation()">
+    </h2-visibility-switch>
+    <h2-button *ngIf="enableDelete" [type]="ButtonType.B" [style]="ButtonStyle.Tertiary" [icon]="Icon.Delete"
+        [wrapper]="false" (click)="onDeleteClicked($event)" class="h2--delete"></h2-button>
+    <h2-button *ngIf="enableClose" [type]="ButtonType.B" [style]="ButtonStyle.Tertiary" [icon]="Icon.Close"
+        [wrapper]="false" (click)="onClose.emit()"></h2-button>
+
+    <ng-content select="[slot='actions']"></ng-content>
+    <h2-expand-collapse-indicator *ngIf="enableCollapse" [collapsed]="collapsed"></h2-expand-collapse-indicator>
+</div>
+
+<h2-collapsible [collapsed]="collapsed" [disabled]="!enableCollapse">
+    <div class="h2-properties-bar-content">
+        <ng-content></ng-content>
+    </div>
+</h2-collapsible>

@@ -1,0 +1,38 @@
+<h2-panels-container>
+  <ng-container *ngTemplateOutlet="columnTemplate; context: { column: root, parent: null }"></ng-container>
+</h2-panels-container>
+
+<ng-template #columnTemplate let-column="column" let-parent="parent">
+  <ng-container *ngIf="column">
+    <ng-container *ngIf="column.groups">
+      <h2-panels-container [width]="listWidth">
+        <h2-list-panel [groups]="column.groups" [config]="column.config" [(selected)]="column.selected"
+                       (selectedChange)="onSelect(column, $event)"
+                       (iconClicked)="onIconClick($event)" (orderChanged)="onOrderChange($event)">
+          <ng-container slot="header" *ngTemplateOutlet="column.headerTemplate || defaultHeaderTemplate;
+                      context: { config: column.headerConfig || {}, column: column }"></ng-container>
+        </h2-list-panel>
+      </h2-panels-container>
+      <ng-container *ngTemplateOutlet="columnTemplate; context: { column: getColumn(column.selected), parent: column.selected }"></ng-container>
+    </ng-container>
+
+    <ng-container *ngIf="!column.groups && column.contentTemplate">
+      <h2-panels-container>
+        <ng-container *ngTemplateOutlet="column.contentTemplate; context: { item: parent.item }"></ng-container>
+      </h2-panels-container>
+    </ng-container>
+  </ng-container>
+</ng-template>
+
+<ng-template #defaultHeaderTemplate let-config="config" let-column="column">
+  <h2-panel-header-bar [text]="config.topTitle">
+    <h2-button *ngIf="config.topButton" [text]="config.topButton.text" [icon]="config.topButton.icon"
+               [wrapper]="false" [type]="ButtonType.A" [style]="ButtonStyle.Tertiary"
+               (clicked)="onHeaderButtonClick(config.topButton.callback)"></h2-button>
+  </h2-panel-header-bar>
+  <h2-panel-header-bar [text]="config?.bottomTitle">
+    <h2-button *ngIf="config.bottomButton" [text]="config.bottomButton.text" [icon]="config.bottomButton.icon"
+               [wrapper]="false" [type]="ButtonType.B" [style]="ButtonStyle.Tertiary"
+               (clicked)="onHeaderButtonClick(config.bottomButton.callback)"></h2-button>
+  </h2-panel-header-bar>
+</ng-template>

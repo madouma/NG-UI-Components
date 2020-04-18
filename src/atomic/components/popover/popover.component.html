@@ -1,0 +1,16 @@
+<ng-template
+  #overlay="cdkConnectedOverlay"
+  cdkConnectedOverlay
+  [cdkConnectedOverlayOrigin]="overlayOrigin"
+  [cdkConnectedOverlayHasBackdrop]="hasBackdrop"
+  (backdropClick)="hide()"
+  (detach)="hide()"
+  [cdkConnectedOverlayOpen]="open"
+  [cdkConnectedOverlayPositions]="positions"
+  [cdkConnectedOverlayLockPosition]="true"
+  [cdkConnectedOverlayPush]="true"
+  [cdkConnectedOverlayViewportMargin]="offset"
+  cdkConnectedOverlayBackdropClass="h2-popover-backdrop"
+  cdkConnectedOverlayPanelClass="h2-popover-pane">
+  <ng-content></ng-content>
+</ng-template>

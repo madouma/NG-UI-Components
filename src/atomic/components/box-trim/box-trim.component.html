@@ -1,0 +1,60 @@
+<div class="h2-vert-grid-line" [class.first]="isFirst" [class.last]="isLast" *ngFor="let line of linearGridLines; let i = index; first as isFirst; last as isLast"
+  [style.left]="i / (linearGridLines.length - 1) * 100 + '%'">
+  <span class="h2-vert-grid-value">
+    {{ getGridMarks(i) | number:'1.0-1' }}
+  </span>
+</div>
+
+<div class="h2-horz-grid-line" [class.first]="isFirst" [class.last]="isLast" *ngFor="let line of linearGridLines; let i = index; first as isFirst; last as isLast"
+  [style.top]="i / (linearGridLines.length - 1) * 100 + '%'">
+  <span class="h2-horz-grid-value">
+    {{ getGridMarks(i) | number:'1.0-1' }}
+  </span>
+</div>
+
+<div class="h2-horz-grid-line-unit">tvd 
+  <span>ft</span>
+</div>
+
+<div class="h2-vert-grid-line-unit">tld 
+  <span>ft</span>
+</div>
+
+<div
+  *ngIf="doughnutInnerRadius !== null && doughnutOuterRadius !== null"
+  class="h2-doughnut"
+  [style.background-image]="doughnutBackgroundGradient"
+  [style.clip-path]="outlineBoxClipPath">
+</div>
+<div
+  class="h2-box-trim-outline"
+  [style.left]="leftPercent"
+  [style.right]="rightPercent"
+  [style.top]="topPercent"
+  [style.bottom]="bottomPercent"
+  cdkDrag
+  cdkDragBoundary="h2-box-trim"
+  (cdkDragStarted)="onDragStarted($event)"
+  (cdkDragMoved)="onDragMoved($event)"
+  (cdkDragEnded)="onDragEnded($event)">
+</div>
+<div
+  class="h2-horizontal-indicator-lines"
+  [style.top]="topPercent"
+  [style.bottom]="bottomPercent">
+</div>
+<div
+  class="h2-vertical-indicator-lines"
+  [style.left]="leftPercent"
+  [style.right]="rightPercent">
+</div>
+<div
+  #horizontalSlider
+  class="h2-horizontal-slider"
+  [style.top]="verticalCenterPercent">
+</div>
+<div
+  #verticalSlider
+  class="h2-vertical-slider"
+  [style.left]="horizontalCenterPercent">
+</div>

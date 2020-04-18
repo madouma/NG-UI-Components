@@ -1,0 +1,54 @@
+/*
+ * SPACINGS
+ *==============================================*/
+
+$y-spacings: (l: 21px,
+m: 17px,
+s: 11px,
+xs: 9px,
+xxs:5px);
+
+$x-spacings: (xl:40px,
+l: 20px,
+m: 10px,
+s: 5px,
+xs: 2px,
+xxs: 1px);
+
+$heights: (xl: 34px,
+l: 28px,
+m: 24px,
+s: 22px,
+xs: 16px);
+
+$widths: (xl: 300px,
+l: 180px,
+m: 120px,
+s: 90px,
+xs: 60px,
+xxs: 30px);
+
+$gaps: (xl: 9px,
+m: 4px,
+s: 3px,
+xs: 2px,
+xxs: 1px);
+
+$radii: (l: 6px,
+m: 3px,
+s: 2px);
+
+/*
+ * ANIMATIONS
+ *==============================================*/
+
+$speed: .1s;
+$timing: linear;
+
+/*
+ * FONTS
+ *==============================================*/
+
+$fonts: (light: ("Roboto-Light", sans-serif),
+regular: ("Roboto-Regular", sans-serif),
+bold: ("Roboto-Bold", sans-serif));

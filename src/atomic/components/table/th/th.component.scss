@@ -1,0 +1,14 @@
+@import "../../../styles/variables";
+@import "../../../styles/mixins";
+
+:host {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  background-color: var(--fraction-body);
+  color: var(--fraction-title);
+  height: map-get($heights, l);
+  padding: 0 map-get($x-spacings, s);
+  @include font-body-2;
+  @include truncate-text;
+}

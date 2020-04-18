@@ -1,0 +1,32 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+$thickness: 3px;
+$width: 16px;
+$spin-speed: .6s;
+
+.h2-spinner-inner {
+  display: block;
+  position: relative;
+  text-indent: -9999em;
+  border: $thickness solid;
+  border-color: transparent transparent transparent var(--text-hilight);
+  transform: translateZ(0);
+  animation: spin $spin-speed infinite linear;
+  opacity: .6;
+
+  &, &:after {
+    border-radius: 50%;
+    width: $width - $thickness;
+    height: $width - $thickness;
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

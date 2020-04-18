@@ -1,0 +1,104 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+$height: map-get($heights, xs);
+$width: 1.86 * $height;
+$handle-size: $height - 2px;
+
+:host {
+  display: flex;
+  align-items: flex-start;
+}
+
+.h2-control-box {
+  display: flex;
+  align-items: center;
+  min-height: map-get($heights, s);
+}
+
+.h2-switch-container {
+  display: inline-flex;
+  line-height: 0;
+  margin: 0;
+  height: auto;
+  padding: 0;
+  position: relative;
+  width: $width;
+
+  &.h2--s {
+    zoom: 67%;
+  }
+
+  input {
+    clip: rect(0,0,0,0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    position: absolute;
+    width: 1px;
+  }
+
+  input:not(:disabled) {
+    &:focus + .h2-switch-control,
+    + .h2-switch-control:hover {
+      @include glow(var(--primary-accent));
+    }
+  }
+
+  // When ON
+  input:checked + .h2-switch-control {
+    background-color: var(--primary-accent);
+
+    &::before {
+      transform: translateX($width - $handle-size - 1px);
+    }
+  }
+
+  // When DISABLED
+  input:disabled + .h2-switch-control {
+    background-color: var(--controls-midlight);
+    cursor: not-allowed;
+
+    &::before {
+      background-color: var(--controls-lolight);
+    }
+  }
+}
+
+.h2-switch-control {
+  background-color: var(--switch-shade);
+  background-clip: padding-box;
+  border-radius: $height / 2;
+  cursor: pointer;
+  display: block;
+  height: $height;
+  left: 0;
+  top: 0;
+  width: $width;
+
+  &::before {
+    background-color: var(--controls-hilight);
+    border-radius: 50%;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, .3);
+    content: "";
+    display: block;
+    height: $handle-size;
+    left: 1px;
+    position: absolute;
+    top: 1px;
+    width: $handle-size;
+  }
+
+  &.h2--initialized {
+    transition: background-color $speed $timing,
+                box-shadow $speed $timing;
+
+    &:before {
+      transition: background-color $speed $timing,
+                  border $speed $timing,
+                  box-shadow $speed $timing,
+                  color $speed $timing,
+                  transform $speed $timing;
+    }
+  }
+}

@@ -1,0 +1,32 @@
+<div
+  *ngIf="boxLeft !== null && boxRight !== null && boxTop !== null && boxBottom !== null"
+  class="h2-box"
+  [style.clip-path]="outerCircleClipPath">
+  <div
+    class="h2-box-fill"
+    [style.clip-path]="boxClipPath"
+    [style.background-image]="boxFillGradient">
+  </div>
+</div>
+<div
+  class="h2-circle-fill"
+  [style.background-image]="circleFillGradient">
+</div>
+<div
+  class="h2-circle-outline-inner"
+  [style.width]="innerRadiusPercent"
+  [style.height]="innerRadiusPercent">
+</div>
+<div
+  class="h2-circle-outline-outer"
+  [style.width]="outerRadiusPercent"
+  [style.height]="outerRadiusPercent">
+</div>
+<div
+  class="h2-indicator-lines"
+  [ngStyle]="indicatorLinesStyle">
+</div>
+<div
+  #slider
+  class="h2-radial-trim-slider">
+</div>

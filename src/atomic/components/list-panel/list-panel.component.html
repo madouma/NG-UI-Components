@@ -1,0 +1,63 @@
+<ng-content select="[slot='header']"></ng-content>
+
+<ul class="h2-list-panel-groups h2-scrollbar" [ngClass]="config.listItemSize">
+    <li class="h2-list-panel-group" [class.h2--no-header]="!config.showGroupHeaders" *ngFor="let group of groups">
+        <span *ngIf="config.showGroupHeaders" class="h2-list-panel-group-title"
+            [class.h2--collapse-enabled]="config.enableGroupCollapse" (click)="toggleGroupCollapse(group)">
+            {{group.title}}
+            <h2-chevron-indicator *ngIf="config.enableGroupCollapse" [down]="group.collapsed"></h2-chevron-indicator>
+        </span>
+        <h2-collapsible [collapsed]="group.collapsed" [disabled]="!config.enableGroupCollapse">
+            <ng-container *ngIf="config.enableDrag || group.enableDrag; else groupWithDragDisabled">
+                <ul cdkDropList cdkDropListLockAxis="y" (cdkDropListDropped)="onOrderChange(group, $event)">
+                    <!-- h2-lpi- is a hook for automation testing -->
+                    <li class="h2-list-panel-item" [ngClass]="'h2-lpi-' + item.text | kebabCase"
+                        [class.h2--view-disabled]="!item.visible"
+                        [class.h2--selected]="selected?.item === item && selectable" *ngFor="let item of group.items"
+                        cdkDrag (click)="onSelect(group, item)">
+                        <ng-container
+                            *ngTemplateOutlet="template ? template  : itemTemplate; context: { item: item, group: group }">
+                        </ng-container>
+                    </li>
+                </ul>
+            </ng-container>
+            <ng-template #groupWithDragDisabled>
+                <ul>
+                    <!-- h2-lpi- is a hook for automation testing -->
+                    <li class="h2-list-panel-item" [ngClass]="'h2-lpi-' + item.text | kebabCase"
+                        [class.h2--view-disabled]="!item.visible"
+                        [class.h2--selected]="selected?.item === item && selectable" *ngFor="let item of group.items"
+                        (click)="onSelect(group, item)">
+                        <ng-container
+                            *ngTemplateOutlet="group.title === 'RoxC Link' ? roxcLinkTemplate : template ? template : itemTemplate; context: { item: item, group: group }">
+                        </ng-container>
+                    </li>
+                </ul>
+            </ng-template>
+        </h2-collapsible>
+    </li>
+</ul>
+
+<ng-template #itemTemplate let-item="item" let-group="group">
+    <span class="h2-list-panel-label h2-font-body-2" h2RevealTruncatedText>{{item.text}}</span>
+    <div class="h2-list-panel-actions" [class.h2--enabled]="!item.visible">
+        <h2-icon class="h2-list-panel-action" [tooltip]="action.tooltip"
+            [class.h2--enabled]="action.icon === Icon.ViewDisable && !item.visible" h2Toggled [icon]="action.icon"
+            *ngFor="let action of item.actions || actions" (click)="onIconClicked(group, item, action)">
+        </h2-icon>
+        <h2-icon *ngIf="config.enableDrag || group.enableDrag" class="h2-list-panel-action" [icon]="Icon.DragAndDrop">
+        </h2-icon>
+    </div>
+</ng-template>
+
+<ng-template #roxcLinkTemplate let-item="item" let-group="group">
+    <span class="h2-list-panel-label h2-font-body-2 h2--left-spacing" [class.h2--disable-roxclink]="!item.visible"
+        h2RevealTruncatedText>{{item.text}}</span>
+    <div class="h2-list-panel-actions" [class.h2--disable-roxclink]="!item.visible"
+        [class.h2--enabled]="item.data.Checked">
+        <h2-icon class="h2-list-panel-action" [class.h2--disable-roxclink]="!item.visible"
+            [class.h2--enabled]="item.data.Checked" h2Toggled [icon]="Icon.Link"
+            (click)="onIconClicked(group, item, {icon:Icon.Link})">
+        </h2-icon>
+    </div>
+</ng-template>

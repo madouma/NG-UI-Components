@@ -1,0 +1,13 @@
+<div [class.h2-control-box]="controlBox" [class.h2-custom-control-box]="!controlBox"
+    *ngIf="wrapper; else buttonTemplate" [class.u-mr-xl]="!controlBox">
+    <ng-template [ngTemplateOutlet]="buttonTemplate"></ng-template>
+</div>
+<ng-template #buttonTemplate>
+    <button type="button" [ngClass]="[size, type, style, loadingClass]" [class.h2--no-text]="!text"
+        [disabled]="disabled" [tabindex]="loading ? -1 : 0" (click)="onClick($event)">
+        <h2-icon *ngIf="icon" [class.h2--no-highlight]="iconTextSpacer" [icon]="icon"></h2-icon>
+        <span [ngClass]="{'u-pl-s' : iconTextSpacer}">{{text}}</span>
+        <h2-spinner *ngIf="loading"></h2-spinner>
+    </button>
+    <h2-icon *ngIf="success" [icon]="Icon.Checkmark"></h2-icon>
+</ng-template>

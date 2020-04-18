@@ -1,0 +1,65 @@
+<h2-label *ngIf="label && !displayAsTooltip" [text]="label" [align]="LabelAlign.Right"></h2-label>
+<div
+  class="h2-textbox-input-wrapper"
+  [class.h2--as-tooltip]="displayAsTooltip"
+  [class.h2--has-icon]="showCheckmark || showSpinner">
+  <input 
+    *ngIf="!datePicker"
+    #textbox
+    [type]="type"
+    step="any"
+    [ngClass]="['h2-textbox-input', size, textAlign]"
+    [class.h2--as-tooltip]="displayAsTooltip"
+    [class.h2--hazard]="errorMsg"
+    [disabled]="disabled"
+    [readonly]="readonly || loading"
+    [placeholder]="placeholder"
+    [(ngModel)]="value"
+    [h2Tooltip]="tooltipMsg"
+    [h2TooltipDisable]="!tooltipMsg"
+    [h2TooltipType]="tooltipType"
+    (ngModelChange)="onChange($event)"
+    (blur)="onBlur()"
+    (focus)="onFocus()"
+    (keyup.enter)="onTouched()" />
+
+  <!-- This is a dummy input that is only used to display the formatted value -->
+  <input
+    *ngIf="value && format && !datePicker"
+    tabindex="-1"
+    type="text"
+    [ngClass]="['h2-textbox-input-formatted', size, textAlign]"
+    [class.h2--as-tooltip]="displayAsTooltip"
+    [class.h2--hazard]="errorMsg"
+    [disabled]="disabled"
+    [readonly]="readonly || loading"
+    [value]="value | invoke:formatValue" />
+
+  <!-- To accommodate date piker directives -->
+  <ng-container *ngIf="datePicker">
+    <input
+      tabindex="-1"
+      type="text"
+      mwlFlatpickr
+      [ngClass]="['h2-textbox-input h2-date-picker', size, textAlign]"
+      [(ngModel)]="value"
+      (ngModelChange)="dateModelChanged($event)"
+      [altInput]="false"
+      [convertModelValue]="true"
+      [enableTime]="true"
+      [mode]="datePikerMode"
+      dateFormat="m/d/y h:i K"
+      altFormat="m/d/y h:i K" />
+  </ng-container>
+
+  <ng-container *ngIf="template">
+    <ng-container *ngTemplateOutlet="iTemplate; context: { icon: template }"></ng-container>
+  </ng-container>
+  
+  <ng-template #iTemplate let-icon="icon">
+    <h2-icon [icon]="icon"></h2-icon>
+  </ng-template>
+
+  <h2-spinner *ngIf="showSpinner"></h2-spinner>
+</div>
+<h2-label class="h2-textbox-units" *ngIf="units && !displayAsTooltip" [text]="units" [type]="LabelType.Units"></h2-label>

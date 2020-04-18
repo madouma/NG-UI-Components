@@ -1,0 +1,45 @@
+@import "../../styles/variables";
+
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: map-get($heights, s);
+  padding: 0 map-get($x-spacings, m) 0 map-get($x-spacings, s);
+  background-color: var(--panel-header);
+
+  h2-button {
+    margin-left: map-get($x-spacings, s);
+  }
+}
+
+.h2-panel-header-bar-text {
+  margin-right: auto;
+  color: var(--panel-title);
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  .h2-panel-wrapper {
+    display: flex;
+    .h2-panel-toggle-fills {
+      color: var(--primary-accent);
+      border: none;
+      background-color: transparent;
+      font-family: "Roboto-Regular", sans-serif;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 1;
+      letter-spacing: 0.001em;
+      outline: none;
+      &:hover {
+        color: var(--primary-accent-hover);
+      }
+    }
+  }
+}
+
+h2-expand-collapse-indicator {
+  color: var(--primary-accent);
+  cursor: pointer;
+}
+

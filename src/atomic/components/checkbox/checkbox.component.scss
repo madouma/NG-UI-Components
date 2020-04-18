@@ -1,0 +1,97 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+$size: 16px;
+$radius: map-get($radii, s);
+$checked-color: var(--primary-accent);
+$disabled-color: var(--controls-midlight);
+$disabled-invert-color: var(--controls-lolight);
+
+$control-box-height: map-get($heights, s);
+
+:host {
+  display: flex;
+  align-items: flex-start;
+}
+
+.h2-control-box {
+  display: flex;
+  align-items: center;
+  min-height: $control-box-height;
+}
+
+.h2-checkbox-container {
+  position: relative;
+  display: inline-flex;
+  line-height: 0;
+  margin: 0;
+  padding: 0;
+
+  input {
+    clip: rect(0, 0, 0, 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    position: absolute;
+    width: 1px;
+  }
+
+  input:not(:disabled).h2--glow {
+
+    &:focus+.h2-checkbox-control,
+    +.h2-checkbox-control:hover {
+      @include glow($checked-color);
+    }
+  }
+
+  // When CHECKED
+  input:checked+.h2-checkbox-control {
+    h2-icon {
+      opacity: 1;
+    }
+  }
+
+  // When DISABLED
+  input:disabled+.h2-checkbox-control {
+    background-color: $disabled-color;
+    border-color: $disabled-invert-color;
+    color: $disabled-color;
+    cursor: not-allowed;
+  }
+
+  input:checked:disabled+.h2-checkbox-control {
+    background-color: $disabled-invert-color;
+  }
+}
+
+.h2-checkbox-control {
+  color: $checked-color;
+  border: 1px solid $checked-color;
+  cursor: pointer;
+  display: block;
+  left: 0;
+  top: 0;
+  border-radius: $radius;
+  box-sizing: border-box;
+  transition: background-color $speed $timing,
+    border-color $speed $timing,
+    color $speed $timing;
+
+  h2-icon {
+    position: relative;
+    transition: $speed $timing;
+    opacity: 0;
+    width: 100% !important;
+    height: 100% !important;
+  }
+}
+
+h2-label {
+  &.h2--right {
+    order: 1;
+  }
+
+  &.h2--left {
+    order: -1;
+  }
+}

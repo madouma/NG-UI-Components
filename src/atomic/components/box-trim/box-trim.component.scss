@@ -1,0 +1,254 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+$handle-width: 5px;
+$handle-height: 25px;
+$handle-color: var(--primary-accent);
+$handle-color-hover: var(--primary-accent-hover);
+$handle-color-active: var(--primary-accent-active);
+$container-bg-color: var(--dialog-body);
+$box-fill-color: var(--primary-accent);
+$grid-color: rgba(0, 0, 0, .5);
+$indicator-line: 1px dashed $handle-color;
+$radius: 6px;
+
+$grid-value-color: var(--units);
+
+:host {
+  position: relative;
+  display: block;
+  // width: 100%;
+  // height: 100%;
+  width: 189px;
+  height: 189px;
+  border-radius: $radius;
+  background: $container-bg-color;
+  // background-image: linear-gradient($grid-color 0, transparent 1px),
+  //                   linear-gradient(90deg, $grid-color 0, transparent 1px),
+  //                   linear-gradient($container-bg-color 0, $container-bg-color 100%);
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    border: 1px solid $container-bg-color;
+    border-radius: $radius;
+  }
+}
+
+.h2-horizontal-indicator-lines,
+.h2-vertical-indicator-lines {
+  position: absolute;
+  opacity: .5;
+  z-index: 0;
+}
+
+.h2-horizontal-indicator-lines {
+  width: 100%;
+  left: 0;
+  border-top: $indicator-line;
+  border-bottom: $indicator-line;
+}
+
+.h2-vertical-indicator-lines {
+  height: 100%;
+  top: 0;
+  border-left: $indicator-line;
+  border-right: $indicator-line;
+}
+
+.h2-box-trim-outline {
+  position: absolute;
+  border: 1px solid $handle-color;
+  z-index: 1;
+  cursor: move;
+  // This is needed to overwrite transform set by CDK drag
+  transform: none !important;
+
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: $box-fill-color;
+    opacity: .2;
+  }
+}
+
+.h2-horizontal-slider.noUi-target ::ng-deep,
+.h2-vertical-slider.noUi-target ::ng-deep {
+  position: absolute;
+  border: none;
+  z-index: 2;
+
+  .noUi-handle {
+    background-color: $handle-color;
+    border: none;
+    box-shadow: none;
+    outline: none;
+
+    &:hover, &:focus {
+      background-color: $handle-color-hover
+    }
+
+    &:active {
+      background-color: $handle-color-active;
+    }
+
+    &::before, &::after {
+      display: none;
+    }
+  }
+
+  .noUi-connect, .noUi-origin {
+    transition: none;
+  }
+}
+
+.h2-horizontal-slider.noUi-target ::ng-deep {
+  width: 100%;
+  height: 0;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+
+  .noUi-handle {
+    width: $handle-width;
+    height: $handle-height;
+    top: 50%;
+    right: -$handle-width / 2;
+    margin-top: -$handle-height / 2;
+    cursor: ew-resize;
+  }
+
+  .noUi-connects {
+    display: none;
+  }
+}
+
+.h2-vertical-slider.noUi-target ::ng-deep {
+  width: 0;
+  height: 100%;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+
+  .noUi-handle {
+    width: $handle-height;
+    height: $handle-width;
+    top: -$handle-width / 2;
+    left: 50%;
+    margin-left: -$handle-height / 2;
+    cursor: ns-resize;
+  }
+
+  .noUi-connects {
+    display: none;
+  }
+}
+
+.h2-doughnut {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-radius: 100%;
+}
+
+.h2-vert-grid-line {
+  position: absolute;
+  height: 100%;
+  top: 0;
+  width: 1px;
+  background-color: $grid-color;
+
+  &-unit {
+    width: 30px;
+    // height: 13px;
+    font-size: 10px;
+    text-transform: uppercase;
+    position: absolute;
+    transform: translateX(-50%);
+    bottom: -40px; // -(0 + height(13px) + spacing(10px) + width(30px))
+    transform-origin: left center;
+    left: 50%;
+    @include font-caption;
+    color: var(--units);
+    span {
+      text-transform: initial;
+    }
+  }   
+}
+
+.h2-horz-grid-line {
+  position: absolute;
+  left: 0;
+  height: 1px;
+  width: 100%;
+  background-color: $grid-color;
+
+  &-unit {
+    width: 30px;
+    // height: 13px;
+    font-size: 10px;
+    text-transform: uppercase;
+    position: absolute;
+    right: -60px;
+    top: 50%;
+    transform: translateY(-50%);
+    @include font-caption;
+    color: var(--units);
+    span {
+      text-transform: initial;
+    }
+  }  
+}
+
+.h2-vert-grid-line, .h2-horz-grid-line {
+  &.first, &.last {
+    background: transparent;
+  }
+}
+
+.h2-vert-grid-value {
+  position: absolute;
+  // bottom: 100%;
+  display: block;
+  color: $grid-value-color;
+  transform-origin: left center;
+  transform: rotate(-90deg);
+  user-select: none;
+  @include font-caption;
+
+  width: 20px;
+  height: 8px;
+  bottom: -34px; // FIXME: 0 + width + 4 for box margin + 10px for gap between box
+  text-align: right;
+  line-height: initial;
+}
+
+.h2-horz-grid-value {
+  position: absolute;
+  bottom: 100%;
+  display: block;
+  color: $grid-value-color;
+  transform-origin: left center;
+  // transform: rotate(-90deg);
+  user-select: none;
+  @include font-caption;
+
+
+  height: 20px;
+  width: 20px;
+  height: 8px;
+  right: -30px; // FIXME: 0 + width + 10px for gap between box  
+  top: 50%;
+  transform: translateY(-50%);
+}

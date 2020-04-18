@@ -1,0 +1,99 @@
+@import "../../styles/variables";
+
+$dialog-inner-spacer: map-get($gaps, m);
+$dialog-header-height: 34px;
+$dialog-footer-height: 38px;
+$dialog-z-index: 900;
+
+.h2-dialog {
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  border-radius: map-get($radii, l);
+  overflow: hidden;
+  padding: 0 $dialog-inner-spacer;
+  background-color: var(--dialog-body);
+  border: 1px solid;
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, .6);
+  outline: none;
+  z-index: $dialog-z-index;
+
+  &.h2--default {
+    border-color: var(--primary-accent);
+  }
+
+  $dialog-types: hazard caution success info;
+  @each $type in $dialog-types {
+    &.h2--#{$type} {
+      border-color: var(--#{$type});
+
+      .h2-dialog-header ::ng-deep h2-icon {
+        color: var(--#{$type});
+      }
+    }
+  }
+
+  &.h2--resize {
+    resize: both;
+  }
+}
+
+.h2-dialog-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: $dialog-z-index;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.h2-dialog-header {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 30px;
+  width: calc(100% + #{2 * $dialog-inner-spacer});
+  margin-left: -$dialog-inner-spacer;
+  margin-bottom: $dialog-inner-spacer;
+  background-color: var(--dialog-header);
+}
+
+.h2-dialog-header-left,
+.h2-dialog-header-right {
+  display: flex;
+  align-items: center;
+}
+
+.h2-dialog-title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--label);
+}
+
+.h2-dialog-body {
+  height: calc(100% - #{$dialog-header-height + $dialog-footer-height});
+
+  > * {
+    height: 100%;
+  }
+}
+
+.h2-dialog-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: $dialog-footer-height;
+  padding: 0 map-get($x-spacings, m);
+
+  > ::ng-deep :not(:last-child) {
+    margin-right: map-get($x-spacings, m);
+  }
+}
+
+.cdk-drag-handle {
+  cursor: move;
+}

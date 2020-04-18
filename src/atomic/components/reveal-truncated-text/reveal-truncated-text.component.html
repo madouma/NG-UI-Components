@@ -1,0 +1,15 @@
+<ng-template
+  #overlay="cdkConnectedOverlay"
+  cdkConnectedOverlay
+  [cdkConnectedOverlayOrigin]="overlayOrigin"
+  [cdkConnectedOverlayOpen]="visible"
+  [cdkConnectedOverlayHasBackdrop]="false"
+  [cdkConnectedOverlayLockPosition]="true"
+  [cdkConnectedOverlayPush]="false"
+  [cdkConnectedOverlayPositions]="positions"
+  cdkConnectedOverlayPanelClass="h2-reveal-truncated-text-pane"
+  (detach)="hide()">
+  <div class="h2-reveal-truncated-text" *ngIf="content" [@tooltipAnimation]="visible">
+    {{ content }}
+  </div>
+</ng-template>

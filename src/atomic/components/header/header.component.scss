@@ -1,0 +1,55 @@
+:host {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    height: 100%;
+    background: var(--page-header);
+    color: var(--text-hilight); // TODO: update color
+
+    ::ng-deep {
+        .h2-icon-group {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            background: var(--dialog-header);
+            margin: 0 1px;
+            padding: 0 12px;
+
+            h2-icon {
+                margin: 0 12px;
+            }
+        }
+        h2-icon {
+            color: var(--button-h);
+            margin: 0 16px;
+        }
+        h2-icon:hover {
+            color: white;
+        }
+    }
+}
+
+.h2-left-content {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    justify-content: flex-start;
+}
+
+.h2-center-content {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.h2-right-content {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    justify-content: flex-end;
+}

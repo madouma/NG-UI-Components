@@ -1,0 +1,4 @@
+<h2-icon *ngIf="pokeyEye" class="h2-visibility-switch-icon" [icon]="Icon.ViewDisable" [@fade]="on ? 'out' : 'in'"
+    (click)="onIconClick()"></h2-icon>
+<h2-switch [(ngModel)]="on" [disabled]="disabled" [small]="true" [wrapper]="false" (ngModelChange)="onChange($event)">
+</h2-switch>

@@ -1,0 +1,24 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "atomic/styles/index";
+
+.demo {
+  padding-left: 8px;
+}
+
+.demo > div {
+  border: 1px solid var(--switch-shade);
+  display: inline-block;
+  vertical-align: top;
+  margin: 2px;
+}
+
+// Using this selector, so that it doesn't overwrite the button icon colors.
+.demo > div > h2-icon > .h2-icon {
+  color: var(--label);
+}
+
+body {
+  background-color: var(--demo-background);
+  color: var(--label);
+}

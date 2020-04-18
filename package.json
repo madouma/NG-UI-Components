@@ -1,0 +1,61 @@
+{
+  "author": {
+    "name": "Mamadou"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "@angular/animations": "~7.0.0",
+    "@angular/cdk": "^7.1.1",
+    "@angular/common": "~7.0.0",
+    "@angular/compiler": "~7.0.0",
+    "@angular/core": "~7.0.0",
+    "@angular/forms": "~7.0.0",
+    "@angular/http": "~7.0.0",
+    "@angular/platform-browser": "~7.0.0",
+    "@angular/platform-browser-dynamic": "~7.0.0",
+    "@angular/router": "~7.0.0",
+    "angularx-flatpickr": "^6.1.0",
+    "core-js": "^2.5.4",
+    "flatpickr": "^4.6.2",
+    "ng-inline-svg": "^8.2.2",
+    "nouislider": "^12.1.0",
+    "rxjs": "~6.3.3",
+    "zone.js": "~0.8.26"
+  },
+  "deprecated": false,
+  "description": "Custom Angular Components",
+  "devDependencies": {
+    "@angular-devkit/build-angular": "~0.10.0",
+    "@angular/cli": "~7.0.4",
+    "@angular/compiler-cli": "~7.0.0",
+    "@angular/language-service": "~7.0.0",
+    "@types/jasmine": "~2.8.8",
+    "@types/jasminewd2": "~2.0.3",
+    "@types/node": "~8.9.4",
+    "codelyzer": "~4.5.0",
+    "jasmine-core": "~2.99.1",
+    "jasmine-spec-reporter": "~4.2.1",
+    "karma": "~3.0.0",
+    "karma-chrome-launcher": "~2.2.0",
+    "karma-coverage-istanbul-reporter": "~2.0.1",
+    "karma-jasmine": "~1.1.2",
+    "karma-jasmine-html-reporter": "^0.2.2",
+    "protractor": "~5.4.0",
+    "ts-node": "~7.0.0",
+    "tslint": "~5.11.0",
+    "typescript": "~3.1.1"
+  },
+  "license": "ISC",
+  "main": "main.ts",
+  "name": "ngx-demo",
+  "scripts": {
+    "build": "ng build",
+    "e2e": "ng e2e",
+    "lint": "ng lint",
+    "ng": "ng",
+    "start": "ng serve --port=4201",
+    "test": "ng test",
+    "test:headless": "ng test --watch=false --code-coverage --browsers ChromeHeadless"
+  },
+  "version": "1.0.5"
+}

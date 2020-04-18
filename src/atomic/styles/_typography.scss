@@ -1,0 +1,56 @@
+@import "variables";
+@import "mixins";
+
+[class^="h2-"]::placeholder,
+[class*=" h2-"]::placeholder {
+    font-size: inherit;
+    font-family: inherit;
+    line-height: inherit;
+    letter-spacing: inherit;
+}
+
+[class^="h2-font-"],
+[class*=" h2-font-"] {
+    @include truncate-text;
+    margin: 0;
+}
+
+.h2-font-h1 {
+    @include font-h1;
+}
+
+.h2-font-h2 {
+    @include font-h2;
+}
+
+.h2-font-h3 {
+    @include font-h3;
+}
+
+.h2-font-subtitle {
+    @include font-subtitle;
+}
+
+.h2-font-body-1 {
+    @include font-body-1;
+}
+
+.h2-font-body-2 {
+    @include font-body-2;
+}
+
+.h2-font-body-3 {
+    @include font-body-3;
+}
+
+.h2-font-caption {
+    @include font-caption;
+}
+
+.h2-font-button-1 {
+    @include font-button-1;
+}
+
+.h2-font-button-2 {
+    @include font-button-2;
+}

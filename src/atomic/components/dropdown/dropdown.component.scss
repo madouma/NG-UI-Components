@@ -1,0 +1,239 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+$height: map-get($heights, s);
+$large-item-height: map-get($heights, l);
+
+:host {
+    display: flex;
+    align-items: center;
+}
+
+
+.h2-dropdown-control,
+.h2-dropdown-control--borderless {
+    appearance: none;
+    color: var(--input);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    height: $height;
+    outline: 0;
+    text-decoration: none;
+    user-select: none;
+    white-space: nowrap;
+    @include control-box-padding;
+    @include control-box-margins;
+    @include font-body-1;
+
+
+    @each $size,
+    $width in $widths {
+        &.h2--#{$size} {
+            width: #{$width};
+        }
+    }
+
+    &.h2--button-disabled {
+        cursor: default;
+    }
+
+    &:not(:disabled) .h2--placeholder {
+        color: var(--placeholder);
+    }
+
+    &:disabled,
+    &:disabled:hover,
+    &:disabled:focus,
+    &:disabled:active {
+        cursor: not-allowed;
+    }
+
+    h2-chevron-indicator {
+        color: var(--placeholder);
+
+        &.h2--chevron-indicator-disabled {
+            opacity: 0.5;
+            cursor: default;
+        }
+    }
+}
+
+.h2-dropdown-control {
+    border: 1px solid;
+    border-radius: map-get($radii, m);
+    transition: background-color $speed $timing, border-color $speed $timing;
+
+    &:not(:disabled) {
+        background-color: var(--input-dropdown-bg);
+        border-color: var(--input-dropdown-outline);
+        @include input-glow(var(--primary-accent));
+    }
+
+    &:disabled,
+    &:disabled:hover,
+    &:disabled:focus,
+    &:disabled:active {
+        color: var(--disabled-text);
+        background-color: var(--input-dropdown-disabled-bg);
+        border-color: var(--input-dropdown-outline);
+    }
+}
+
+.h2-dropdown-control--borderless {
+    background-color: inherit;
+    border-color: transparent;
+    margin-left: 0;
+
+    h2-chevron-indicator {
+        margin-left: map-get($x-spacings, s);
+    }
+}
+
+.h2-dropdown-list {
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    background-color: var(--input-dropdown-bg);
+    border-radius: map-get($radii, m);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .15);
+
+    @each $size,
+    $width in $widths {
+        &.h2--#{$size} {
+            min-width: #{$width};
+        }
+    }
+}
+
+.h2-dropdown-item {
+    display: flex;
+    align-items: center;
+    height: $height;
+    color: var(--input);
+    cursor: pointer;
+    @include control-box-padding;
+    @include font-body-1;
+
+    &.h2--large-line-height {
+        height: $large-item-height;
+        padding-top: 8px;
+    }
+
+
+    >.h2-dropdown-item-inner {
+        >span {
+            &.h2--icon-enabled {
+                opacity: 0;
+            }
+
+            &.h2--icon-disabled {
+                opacity: 0.5;
+                @include icon-position-visibility;
+            }
+        }
+    }
+
+
+    &:hover,
+    &:focus {
+        background-color: var(--hover);
+        color: var(--input);
+
+        >.h2-dropdown-item-inner {
+            >span {
+                &.h2--icon-enabled {
+                    opacity: 0.5;
+                    @include icon-position-visibility;
+                }
+            }
+        }
+    }
+
+    &.h2--disabled {
+        cursor: not-allowed;
+        background-color: var(--input-dropdown-bg);
+        color: var(--disabled);
+
+        &:hover {
+            background-color: var(--input-dropdown-bg);
+            color: var(--disabled);
+        }
+    }
+
+    &.h2--selected {
+        background-color: var(--primary-accent);
+        color: var(--text-hilight);
+
+        &:hover {
+            background-color: var(--primary-accent);
+            color: var(--text-hilight);
+        }
+    }
+}
+
+.h2-dropdown-item-inner,
+.h2-dropdown-control-inner {
+    width: 100%;
+    @include truncate-text;
+
+    >span {
+        &.h2--placeholder-text {
+            @include font-body-3;
+            color: var(--placeholder);
+
+            &:hover,
+            &:focus {
+                color: var(--button-c-hover);
+            }
+        }
+
+        &.h2--placeholder-text-disabled {
+            opacity: 0.5;
+            cursor: default;
+
+            &:hover,
+            &:focus {
+                opacity: 0.5;
+                color: var(--placeholder);
+            }
+        }
+
+        &.h2--item {
+            margin-top: 10px;
+        }
+
+        &.h2--item-disabled {
+            opacity: 0.5;
+        }
+
+    }
+
+
+}
+
+.h2-dropdown-line-thickness {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    font-size: 12px;
+
+    >span {
+        display: inline-block;
+        width: 100%;
+        background-color: currentColor;
+        margin-right: map-get($x-spacings, s);
+    }
+}
+
+.h2-marker-style-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    ::ng-deep svg {
+        width: $height - 8px !important;
+        height: $height - 8px !important;
+    }
+}

@@ -1,0 +1,12 @@
+<div class="h2-control-box" *ngIf="wrapper; else checkboxTemplate">
+  <ng-template [ngTemplateOutlet]="checkboxTemplate"></ng-template>
+</div>
+<ng-template #checkboxTemplate>
+  <label class="h2-checkbox-container">
+    <input type="checkbox" [class.h2--glow]="glow" [(ngModel)]="checked" [disabled]="disabled" (ngModelChange)="onChange($event)">
+    <span class="h2-checkbox-control">
+      <h2-icon [icon]="Icon.CheckboxChecked"></h2-icon>
+    </span>
+  </label>
+</ng-template>
+<h2-label [ngClass]="labelPosition" *ngIf="label" [text]="label" [align]="labelAlign"></h2-label>

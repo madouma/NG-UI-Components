@@ -1,0 +1,41 @@
+@import "../../../styles/variables";
+@import "../../../styles/mixins";
+
+$x-padding: map-get($x-spacings, s);
+
+:host {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  background-color: var(--fraction-body);
+  color: var(--input);
+  border: 1px solid var(--panel-body);
+  height: map-get($heights, l);
+  padding: 0 $x-padding;
+  @include font-body-2;
+  @include truncate-text;
+
+  ::ng-deep {
+    h2-textbox {
+      width: calc(100% + #{2 * $x-padding});
+      margin-left: -$x-padding;
+      height: 100%;
+
+      .h2-textbox-input-wrapper {
+        width: 100% !important;
+        height: 100% !important;
+        margin: 0 !important;
+      }
+
+      .h2-textbox-input,
+      .h2-textbox-input-formatted {
+        width: 100% !important;
+        height: 100% !important;
+        margin: 0 !important;
+        border-radius: 0 !important;
+        text-align: center !important;
+        @include font-body-2;
+      }
+    }
+  }
+}

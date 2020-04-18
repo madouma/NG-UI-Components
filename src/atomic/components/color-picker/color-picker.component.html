@@ -1,0 +1,27 @@
+<h2-label *ngIf="label" [text]="label" [align]="LabelAlign.Right"></h2-label>
+<button type="button" #overlayOrigin="cdkOverlayOrigin" cdkOverlayOrigin
+        [ngClass]="['h2-color-picker-button', size, getUniqueColorClass('h2-cp-selected-', selectedColor)]"
+        [class.h2--without-icon]="!showIcon" [disabled]="disabled" (click)="open = true">
+  <span class="h2-color-picker-selected" [style.background-color]="selectedColor"></span>
+  <h2-icon *ngIf="showIcon" class="h2-color-picker-icon" [icon]="Icon.Paint"></h2-icon>
+</button>
+
+<h2-popover #popover [(open)]="open" [overlayOrigin]="overlayOrigin">
+  <div class="h2-color-picker-popover">
+    <div class="h2-color-picker-row">
+      <div class="h2-color-picker-palette">
+        <ul *ngFor="let colors of colorPalette">
+          <li *ngFor="let color of colors" [ngClass]="getUniqueColorClass('h2-cp-', color)" [style.background-color]="color"
+              (click)="onSelectColor(color)">
+          </li>
+        </ul>
+      </div>
+      <h2-opacity-slider *ngIf="showOpacitySlider" [(ngModel)]="opacity" (ngModelChange)="onOpacityChange($event)"
+                         [length]="120" [color]="selectedColor">
+      </h2-opacity-slider>
+    </div>
+    <div class="h2-color-picker-actions">
+      <h2-button [type]="ButtonType.B" [style]="ButtonStyle.Tertiary" [wrapper]="false" text="Cancel" (clicked)="open = false"></h2-button>
+    </div>
+  </div>
+</h2-popover>

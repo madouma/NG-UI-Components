@@ -1,0 +1,60 @@
+<h2-label *ngIf="label" [text]="label" [align]="LabelAlign.Right"></h2-label>
+<button type="button" #overlayOrign="cdkOverlayOrigin" cdkOverlayOrigin
+    [ngClass]="getButtonClasses([getItemUniqueClass('h2-di-selected-', value) | kebabCase])" [disabled]="disabled"
+    (click)="items.length && open = true" [class.h2--button-disabled]="!items.length">
+    <span class="h2-dropdown-control-inner" [class.h2--placeholder]="!selected">
+        <ng-container *ngIf="selected && !cmdTmplate; else placeholderTemplate">
+            <ng-container *ngTemplateOutlet="template; context: { item: selected }"></ng-container>
+        </ng-container>
+        <ng-template #placeholderTemplate><span [ngClass]="{'h2--placeholder-text' : cmdTmplate}"
+                [class.h2--placeholder-text-disabled]="!items.length">{{placeholder}}</span></ng-template>
+    </span>
+    <h2-chevron-indicator [class.h2--chevron-indicator-disabled]="!items.length" [down]="!open"></h2-chevron-indicator>
+</button>
+<h2-popover [overlayOrigin]="overlayOrign" [(open)]="open">
+    <ul class="h2-dropdown-list" [ngClass]="size">
+        <li class="h2-dropdown-item" [class.h2--large-line-height]="cmdTmplate" *ngFor="let item of items"
+            [class.h2--disabled]="item.disabled" [class.h2--selected]="!cmdTmplate && selected === item"
+            [ngClass]="getItemUniqueClass('h2-di-', item) | kebabCase" (click)="cmdTmplate ? '' : onItemClick(item)">
+            <span class="h2-dropdown-item-inner">
+                <ng-container *ngTemplateOutlet="template; context: { item: item }"></ng-container>
+            </span>
+        </li>
+    </ul>
+</h2-popover>
+
+<ng-template #textTemplate let-item="item">
+    {{item.text}}
+</ng-template>
+
+<ng-template #lineThicknessTemplate let-item="item">
+    <span class="h2-dropdown-line-thickness">
+        <span [style.height]="item.value.thickness + 'px'"></span>{{item.value.thickness}}
+    </span>
+</ng-template>
+
+<ng-template #lineStyleTemplate let-item="item">
+    <h2-line-preview [style]="item.value.previewStyle" [thickness]="1" [wrapper]="false"></h2-line-preview>
+</ng-template>
+
+<ng-template #markerStyleTemplate let-item="item">
+    <div class="h2-marker-style-item">
+        <h2-marker-preview [style]="item.value.previewStyle" [wrapper]="false"></h2-marker-preview>
+    </div>
+</ng-template>
+
+<ng-template #commandTemplate let-item="item">
+    <span class="h2--item" [class.h2--item-disabled]="!item.checked">
+        <h2-label [text]="item.text"></h2-label>
+    </span>
+    <span [ngClass]="item.checked ? 'h2--icon-enabled' : 'h2--icon-disabled'">
+        <h2-icon [icon]="Icon.ViewDisable" (click)="onIconClicked(item,Icon.ViewDisable)">
+        </h2-icon>
+    </span>
+</ng-template>
+
+<ng-template #colorGradientTemplate let-item="item">
+    <div [style.background]="item.value | safe: 'style'" [style.width.px]="84" [style.color]="'transparent'">
+        {{item.text}}
+    </div>
+</ng-template>

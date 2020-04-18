@@ -1,0 +1,32 @@
+@import "variables";
+
+.h2-scrollbar.h2-scrollbar {
+  &::-webkit-scrollbar {
+    width: 8px;
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 2px;
+  }
+
+  &::-webkit-scrollbar-button,
+  &::-webkit-scrollbar-track-piece {
+    display: none;
+  }
+
+  &:hover {
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--controls-lolight);
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: var(--controls-hilight);
+    }
+
+    &::-webkit-scrollbar-thumb:active {
+      background-color: var(--controls-hilight);
+    }
+  }
+}

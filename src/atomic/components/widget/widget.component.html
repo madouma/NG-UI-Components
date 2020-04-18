@@ -1,0 +1,14 @@
+<div class="h2-widget-header">
+  <ng-content select="[slot='widgetHeader']"></ng-content>
+
+  <h2-expand-collapse-indicator *ngIf="enableCollapse" [class.h2--collapse-enabled]="enableCollapse"
+    [collapsed]="collapsed" (click)="collapsed = !collapsed">
+  </h2-expand-collapse-indicator>
+  <h2-button *ngIf="enableClose" [type]="ButtonType.C" class="u-ml-s" [style]="ButtonStyle.Tertiary" [icon]="Icon.Close" [wrapper]="false" (click)="closed.emit()"></h2-button>
+</div>
+
+<h2-collapsible [collapsed]="collapsed" [disabled]="!enableCollapse">
+  <div class="h2-widget-body" [style.min-height.px]="height" [ngClass]="{'h2-widget-body--borderless': borderlessBody}">
+    <ng-content select="[slot='widgetBody']"></ng-content>
+  </div>
+</h2-collapsible>

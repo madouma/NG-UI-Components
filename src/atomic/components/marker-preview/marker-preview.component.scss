@@ -1,0 +1,42 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+$markerSize: map-get($heights, xs);
+$titleGap: 1px;
+
+:host {
+  display: inline-flex;
+}
+
+.h2-marker-preview-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  /* -2px to account for border when used within a dropdown */
+  height: map-get($heights, s) - 2px;
+  width: map-get($widths, xxs);
+
+  svg {
+    transform: scale(1.4);
+    width: $markerSize;
+    height: $markerSize;
+  }
+
+  &.h2--no-text {
+    align-items: center;
+
+    svg {
+      transform: scale(1.6);
+    }
+  }
+}
+
+.h2-marker-preview-title {
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+  transform: translate(-50%, -$titleGap);
+  color: var(--units);
+  display: block;
+}

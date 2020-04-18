@@ -1,0 +1,43 @@
+$checker-width: 6px;
+$slider-width: 12px;
+$handle-width: 16px;
+
+:host {
+  &.h2--vertical {
+    width: $handle-width;
+    overflow: hidden;
+
+    .h2-opacity-slider-input {
+      transform-origin: #{$handle-width / 2} 50%;
+      transform: rotate(90deg);
+    }
+  }
+}
+
+.h2-opacity-slider-input {
+  -webkit-appearance: none;
+  background-size: 100% 100%,
+    ($checker-width * 2) ($checker-width * 2),
+    ($checker-width * 2) ($checker-width * 2),
+    ($checker-width * 2) ($checker-width * 2),
+    ($checker-width * 2) ($checker-width * 2);
+  background-position: 0 0,
+    (0 0),
+    ($checker-width 0),
+    ($checker-width -#{$checker-width}),
+    (0 $checker-width);
+  height: $slider-width;
+  outline: none;
+  direction: rtl;
+  margin: 0;
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: $handle-width;
+    height: $handle-width;
+    background-color: transparent;
+    border: 2px solid white;
+    border-radius: 100%;
+    box-shadow: 0 0 3px 0 #000;
+  }
+}

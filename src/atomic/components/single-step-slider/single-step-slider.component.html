@@ -1,0 +1,11 @@
+<h2-label [class.u-invisible]="!label" [text]="label" [align]="LabelAlign.Right"></h2-label>
+
+<div class="h2-slider-wrapper">
+  <div class="h2-slider">
+    <div #stepSlider class="h2-slider-control"></div>
+    <div class="h2-slider-center-bar"></div>
+  </div>
+  <span class="h2-slider-step" [class.active]="stepPosition(i) < stepPosition(value)"
+    *ngFor="let line of stepLines; let i = index" [style.left]="stepPosition(i) + '%'">
+  </span>
+</div>

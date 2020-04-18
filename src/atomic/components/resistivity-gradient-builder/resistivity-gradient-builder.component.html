@@ -1,0 +1,42 @@
+<div class="h2-grid">
+  <div class="h2-grid-linear">
+    <div
+      class="h2-grid-line"
+      *ngFor="let line of linearGridLines; let i = index"
+      [style.left]="i / (linearGridLines.length - 1) * 100 + '%'">
+      <span class="h2-grid-value">
+        {{ map.rangePercentConverter.getScale(i) | number:'1.0-1' }}
+      </span>
+    </div>
+  </div>
+  <div #mySlider [ngStyle]="sliderInputStyles"></div>
+  <div
+    class="h2-current-handle-pos"
+    *ngIf="this.map?.colors[this.map.selectedIndex]"
+    [style.left]="getPercent(selectedHandleLeft) + '%'">
+    <div #inputWrapper class="h2-input-wrapper">
+        <h2-textbox
+          #textbox
+          [style.left]="inputOffset + 'px'"
+          [ngModel]="currentInputValue | number:'0.0-2' | removeChar:','"
+          [type]="TextboxType.Number"
+          [textAlign]="TextboxTextAlign.Center"
+          [size]="TextboxSize.XSmall"
+          [displayAsTooltip]="true"
+          [errorMsg]="errorMsg"
+          (ngModelChange)="validate($event)"
+          (keydown.esc)="textbox.blurOut()"
+          (keydown.enter)="textbox.blurOut()"
+          (blur)="onInputBlur($event)"
+          (focus)="onInputFocus($event)">
+        </h2-textbox>
+    </div>
+    <h2-color-picker
+      [showIcon]="false"
+      [ngModel]="this.map.colors[this.map.selectedIndex].hex"
+      [opacity]="this.map.colors[this.map.selectedIndex].alpha"
+      (ngModelChange)="onColorHexChange($event)"
+      (opacityChange)="onColorAlphaChange($event)">
+    </h2-color-picker>
+  </div>
+</div>

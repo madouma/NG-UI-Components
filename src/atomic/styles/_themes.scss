@@ -1,0 +1,142 @@
+$themes: (
+  light: (
+    // Text Colors
+    --dialog-title: #4D4D4D,
+    --input: #2F2F2F,
+    --label: #555555,
+    --units: #888888,
+    --fraction-title: #717171,
+    --panel-title: #505050,
+    --text-hilight: #2F2F2F,
+    --list-group-title: #818181,
+    --placeholder: #B2B2B2,
+    --disabled-text: #818181,
+    --tooltip-text: #FFFFFF,
+    // Button/Accent Colors
+    --primary-accent: #4AB49E,
+    --primary-accent-hover: #86F6DF,
+    --primary-accent-active: #00886C,
+    --button: #515151,
+    --button-hover: #9B9B9B,
+    --button-active: #E3E3E3,
+    --button-c: #6E6E6E, // TODO: Need light theme
+    --button-c-hover: #FFFFFF, // TODO: Need light theme
+    --button-c-active: #292929, // TODO: Need light theme
+    --button-h: #9E9E9E, // TODO: Need light theme
+    --button-h-hover: #FFFFFF, // TODO: Need light theme
+    --button-h-active: #FFFFFF, // TODO: Need light theme
+    --solid-button-text: #F8F9F9,
+    // Input/Dropdown Colors
+    --input-dropdown-bg: #FCFCFC,
+    --input-dropdown-disabled-bg: #E8E8E8,
+    --input-dropdown-outline: #E8E8E8,
+    // Control Colors
+    --controls-hilight: #FBFBFB,
+    --controls-midlight: #CBCBCB,
+    --controls-lolight: #818181,
+    --switch-shade: #696969,
+    --slider-shade: #CDCDCD,
+    // Header/Body Colors
+    --dialog-header: #FFFFFF,
+    --dialog-body: #FFFFFF,
+    --panel-header: #ECECEC,
+    --panel-body: #ECECEC,
+    --fraction-header: #F6F6F6,
+    --fraction-body: #F6F6F6,
+    --page-header: #FFFFFF,
+    // Mixed Use Colors
+    --disabled: #B2B2B2,
+    --hover: #DBDBDB,
+    --hazard: #FF003C,
+    --hazard-hover: #FF3363,
+    --hazard-active: #CC0030,
+    --caution: #FF9300,
+    --caution-hover: #FFAA33,
+    --caution-active: #CC7700,
+    --success: #88C100,
+    --success-hover: #A1E600,
+    --success-active: #6B9900,
+    --info: #00BAFF,
+    --info-hover: #4DCFFF,
+    --info-active: #0096CC,
+    // TODO: delete this once demo is finished
+    --demo-background: #FFFFFF
+  ),
+  dark: (
+    // Text Colors
+    --dialog-title: #E3E3E3,
+    --input: #FFFFFF,
+    --label: #DEDEDE,
+    --units: #888888,
+    --fraction-title: #ABABAB,
+    --panel-title: #888888,
+    --text-hilight: #FFFFFF,
+    --list-group-title: #888888,
+    --placeholder: #888888,
+    --disabled-text: #888888,
+    --tooltip-text: #FFFFFF,
+    // Button/Accent Colors
+    --primary-accent: #4AB49E,
+    --primary-accent-hover: #86F6DF,
+    --primary-accent-active: #00886C,
+    --button: #E8E8E8,
+    --button-hover: #FFFFFF,
+    --button-active: #989898,
+    --button-c: #6E6E6E,
+    --button-c-hover: #FFFFFF,
+    --button-c-active: #292929,
+    --button-h: #9E9E9E,
+    --button-h-hover: #FFFFFF,
+    --button-h-active: #FFFFFF,
+    --solid-button-text: #292929,
+    // Input/Dropdown Colors
+    --input-dropdown-bg: #292929,
+    --input-dropdown-disabled-bg: #575757,
+    --input-dropdown-outline: transparent,
+    // Control Colors
+    --controls-hilight: #EFEFEF,
+    --controls-midlight: #575757,
+    --controls-lolight: #888888,
+    --switch-shade: #292929,
+    --slider-shade: #292929,
+    // Header/Body Colors
+    --dialog-header: #2F2F2F,
+    --dialog-body: #292929,
+    --panel-header: #343434,
+    --panel-body: #2F2F2F,
+    --fraction-header: #3A3A3A,
+    --fraction-body: #3A3A3A,
+    --page-header: #272727,
+    // Mixed Use Colors
+    --disabled: #505050,
+    --hover: #4E4E4E,
+    --hazard: #FF003C,
+    --hazard-hover: #FF3363,
+    --hazard-active: #CC0030,
+    --caution: #FF9300,
+    --caution-hover: #FFAA33,
+    --caution-active: #CC7700,
+    --success: #88C100,
+    --success-hover: #A1E600,
+    --success-active: #6B9900,
+    --info: #00BAFF,
+    --info-hover: #4DCFFF,
+    --info-active: #0096CC,
+    // TODO: delete this once demo is finished
+    --demo-background: #1A1A1A
+  )
+);
+
+@each $themeName, $themeColors in $themes {
+  .h2-theme-#{$themeName} {
+    @each $colorName, $hexColor in $themeColors {
+      #{$colorName}: $hexColor;
+    }
+
+    // Split each hex to r,g,b so that we can then use the colors with alpha likes so:
+    // rgba(--color-name-rgb, 0.2)
+    @each $colorName, $hexColor in $themeColors {
+      #{$colorName}-rgb: red($hexColor), green($hexColor), green($hexColor);
+    }
+  }
+}

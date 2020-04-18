@@ -1,0 +1,13 @@
+@import "../../styles/variables";
+
+:host {
+  display: flex;
+  align-items: center;
+  cursor: default;
+}
+
+.h2-visibility-switch-icon {
+  display: none;
+  margin-right: map-get($x-spacings, m);
+  cursor: pointer;
+}

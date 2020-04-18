@@ -1,0 +1,68 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+:host {
+    display: block;
+    margin-bottom: map-get($gaps, xs);   
+    .h2-widget-header {
+        border-top-left-radius: map-get($radii, m);
+        border-top-right-radius: map-get($radii, m);
+
+        ::ng-deep h2-dropdown {
+            .h2-dropdown-control, .h2-dropdown-control--borderless {
+                margin-top: map-get($gaps, xs);
+                margin-bottom: map-get($gaps, xs);
+            }
+        }
+
+        ::ng-deep h2-expand-collapse-indicator {
+            margin-left: auto;
+            &.h2--collapse-enabled {
+                cursor: pointer;
+            }             
+        }
+    }
+    .h2-widget-body {
+        border-bottom-left-radius: map-get($radii, m);
+        border-bottom-right-radius: map-get($radii, m);
+    }
+
+    ::ng-deep h2-collapsible {
+        height: 100%;
+    }    
+
+    // TODO: Revisit "[data-box-trim]" and fix in H2
+    ::ng-deep h2-collapsible h2-properties-bar[data-box-trim] .h2-properties-bar-content {
+        padding: 10px;
+        height: 238px;
+        align-items: flex-start;            
+    }    
+}
+
+:host-context(.canvas) .h2-widget-body {
+    box-sizing: border-box;
+}
+
+.h2-widget {
+    &-header {
+        display: flex;
+        align-items: center;
+        min-height: map-get($heights, xl);
+        padding: 0 map-get($x-spacings, m) 0 map-get($x-spacings, m);
+        background: var(--dialog-header);
+        color: var(--panel-title);
+        text-transform: uppercase;       
+    }
+
+    &-body {
+        height: calc(100% - #{map-get($heights, xl)});
+        background: #212121;
+        ::ng-deep > :last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.h2-widget-body:not(.h2-widget-body--borderless) {
+    border: 3px solid var(--fraction-body);
+}

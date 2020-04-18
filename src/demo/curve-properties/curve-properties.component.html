@@ -1,0 +1,37 @@
+<h2-content-panel>
+  <ng-container slot="header">
+    <h2-panel-header-bar></h2-panel-header-bar>
+    <h2-panel-header-bar [text]="curveName"></h2-panel-header-bar>
+  </ng-container>
+
+  <h2-properties-bar text="Raw Log" [enableVisibilitySwitch]="true" [visible]="rawLog.visible">
+    <h2-dropdown class="u-mr-l" [(ngModel)]="rawLog.lineThickness" accessor="value.thickness" #control [size]="DDSize.XSmall" [itemTemplate]="DDTemplate.LineThickness" [items]="lineThicknessDropdown"></h2-dropdown>
+    <h2-dropdown class="u-mr-l" [(ngModel)]="rawLog.lineStyle" accessor="value.style" #control [size]="DDSize.XSmall" [itemTemplate]="DDTemplate.Text" [items]="lineStyleDropdown"></h2-dropdown>
+    <h2-color-picker [(ngModel)]="rawLog.lineColor" #control></h2-color-picker>
+  </h2-properties-bar>
+
+  <h2-properties-bar text="Squared Log" [enableVisibilitySwitch]="true" [visible]="squaredLog.visible">
+    <h2-dropdown class="u-mr-l" [(ngModel)]="squaredLog.lineThickness" accessor="value.thickness" #control [size]="DDSize.XSmall" [itemTemplate]="DDTemplate.LineThickness" [items]="lineThicknessDropdown"></h2-dropdown>
+    <h2-dropdown class="u-mr-l" [(ngModel)]="squaredLog.lineStyle" accessor="value.style" #control [size]="DDSize.XSmall" [itemTemplate]="DDTemplate.Text" [items]="lineStyleDropdown"></h2-dropdown>
+    <h2-color-picker [(ngModel)]="squaredLog.lineColor" #control></h2-color-picker>
+  </h2-properties-bar>
+
+  <h2-properties-bar text="Convolved Log" [enableVisibilitySwitch]="true" [visible]="convolvedLog.visible">
+    <h2-dropdown class="u-mr-l" [(ngModel)]="convolvedLog.lineThickness" accessor="value.thickness" #control [size]="DDSize.XSmall" [itemTemplate]="DDTemplate.LineThickness" [items]="lineThicknessDropdown"></h2-dropdown>
+    <h2-dropdown class="u-mr-l" [(ngModel)]="convolvedLog.lineStyle" accessor="value.style" #control [size]="DDSize.XSmall" [itemTemplate]="DDTemplate.Text" [items]="lineStyleDropdown"></h2-dropdown>
+    <h2-color-picker [(ngModel)]="convolvedLog.lineColor" #control></h2-color-picker>
+  </h2-properties-bar>
+
+  <h2-properties-bar text="Time Scale (api)">
+    <h2-textbox class="u-mr-l" [(ngModel)]="timeScaleMin" label="Min" [size]="TextboxSize.XSmall"></h2-textbox>
+    <h2-textbox class="u-mr-l" [(ngModel)]="timeScaleMax" label="Max" [size]="TextboxSize.XSmall"></h2-textbox>
+  </h2-properties-bar>
+
+  <h2-properties-bar text="Log Processing Parameters">
+    <h2-textbox class="u-mr-l" [(ngModel)]="bedTolerance" label="Bed Tolerance" units="ft" [size]="TextboxSize.Small"></h2-textbox>
+    <h2-dropdown class="u-mr-l" [(ngModel)]="smoothingMethod" label="Smoothing Method" [size]="DDSize.Medium" [itemTemplate]="DDTemplate.Text" [items]="smoothingMethodDropdown"></h2-dropdown>
+    <h2-textbox class="u-mr-l" [(ngModel)]="stepSize" label="Step Size" units="ft" [size]="TextboxSize.Small"></h2-textbox>
+    <h2-textbox class="u-mr-l" [(ngModel)]="valueTolerance" label="Value Tolerance" units="api" [size]="TextboxSize.Small"></h2-textbox>
+    <h2-textbox [(ngModel)]="windowLength" label="Window Length" [size]="TextboxSize.Small"></h2-textbox>
+  </h2-properties-bar>
+</h2-content-panel>

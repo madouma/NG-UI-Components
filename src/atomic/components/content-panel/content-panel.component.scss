@@ -1,0 +1,22 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+:host {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: var(--panel-body);
+  @include disable-container-transition;
+
+  &.h2--disable {
+    @include disable-container;
+  }
+}
+
+.h2-content-panel-items {
+  // TODO: update this, since this declaration assumes that all headers will have two panel-header-bars
+  max-height: calc(100% - #{map-get($heights, s) * 2});
+  overflow-y: auto;
+  overflow-x: hidden;
+}

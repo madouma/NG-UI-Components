@@ -1,0 +1,11 @@
+<h3 class="h2-panel-header-bar-text h2-font-h2">
+    <span>{{text}}</span>
+    <div class="h2-panel-wrapper">
+        <button class="h2-panel-toggle-fills"  *ngIf="toggleButtonTexts?.length" (click)="toggleButtonClick()">
+            {{getButtonText()}}
+        </button>
+        <h2-expand-collapse-indicator *ngIf="enableCollapse" [class.h2--collapse-enabled]="enableCollapse" class="h2-panel-collapse-all"
+            [collapsed]="collapsed" (click)="toggleAllBars()">
+        </h2-expand-collapse-indicator>
+    </div>
+</h3>

@@ -1,0 +1,98 @@
+<div class="h2-marker-preview-wrapper" [ngClass]="['h2--' + style]" [class.h2-control-box]="wrapper"
+    [class.h2--no-text]="!text">
+    <span *ngIf="text" class="h2-marker-preview-title h2-font-caption">{{text}}</span>
+    <svg *ngIf="size && style && borderWidth" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet"
+        [attr.viewBox]="'0 0 ' + viewboxSize + ' ' + viewboxSize">
+
+        <!-- CIRCLE -->
+        <circle *ngIf="style === Style.Round || style === Style.Circle" stroke-linejoin="round"
+            [attr.stroke-width]="borderWidth" [attr.stroke]="lineColor" [attr.fill]="fillColor" [attr.r]="size / 2"
+            [attr.cx]="viewboxSize / 2" [attr.cy]="viewboxSize / 2">
+        </circle>
+
+        <!-- SQUARE -->
+        <g *ngIf="style === Style.Square">
+            <rect stroke-linejoin="round" [attr.stroke-width]="borderWidth" [attr.stroke]="lineColor"
+                [attr.fill]="fillColor" [attr.width]="size" [attr.height]="size" [attr.x]="viewboxSize / 2 - size / 2"
+                [attr.y]="viewboxSize / 2 - size / 2">
+            </rect>
+        </g>
+
+        <!-- DIAMOND -->
+        <polygon *ngIf="style === Style.Diamond" stroke-linejoin="round" [attr.stroke-width]="borderWidth"
+            [attr.stroke]="lineColor" [attr.fill]="fillColor" [attr.points]="diamondPoints">
+        </polygon>
+
+        <!-- TRIANGLE -->
+        <polygon *ngIf="style === Style.Triangle" stroke-linejoin="round" [attr.stroke-width]="borderWidth"
+            [attr.stroke]="lineColor" [attr.fill]="fillColor" [attr.points]="trianglePoints">
+        </polygon>
+
+        <!-- CROSS -->
+        <g *ngIf="style === Style.Cross">
+            <line [attr.stroke-width]="borderWidth" [attr.stroke]="lineColor" [attr.x1]="lineEdgeSpace"
+                [attr.y1]="lineEdgeSpace" [attr.x2]="viewboxSize - lineEdgeSpace"
+                [attr.y2]="viewboxSize - lineEdgeSpace">
+            </line>
+            <line [attr.stroke-width]="borderWidth" [attr.stroke]="lineColor" [attr.x1]="viewboxSize - lineEdgeSpace"
+                [attr.y1]="lineEdgeSpace" [attr.x2]="lineEdgeSpace" [attr.y2]="viewboxSize - lineEdgeSpace">
+            </line>
+        </g>
+
+        <!-- PLUS -->
+        <g *ngIf="style === Style.Plus">
+            <line [attr.stroke-width]="borderWidth" [attr.stroke]="lineColor" [attr.x1]="viewboxSize / 2"
+                [attr.y1]="lineEdgeSpace" [attr.x2]="viewboxSize / 2" [attr.y2]="viewboxSize - lineEdgeSpace">
+            </line>
+            <line [attr.stroke-width]="borderWidth" [attr.stroke]="lineColor" [attr.x1]="lineEdgeSpace"
+                [attr.y1]="viewboxSize / 2" [attr.x2]="viewboxSize - lineEdgeSpace" [attr.y2]="viewboxSize / 2">
+            </line>
+        </g>
+
+        <!-- STAR -->
+        <g *ngIf="style === Style.Star">
+            <line [attr.stroke-width]="borderWidth" [attr.stroke]="lineColor" [attr.x1]="lineEdgeSpace"
+                [attr.y1]="lineEdgeSpace" [attr.x2]="viewboxSize - lineEdgeSpace"
+                [attr.y2]="viewboxSize - lineEdgeSpace">
+            </line>
+            <line [attr.stroke-width]="borderWidth" [attr.stroke]="lineColor" [attr.x1]="viewboxSize - lineEdgeSpace"
+                [attr.y1]="lineEdgeSpace" [attr.x2]="lineEdgeSpace" [attr.y2]="viewboxSize - lineEdgeSpace">
+            </line>
+            <line [attr.stroke-width]="borderWidth" [attr.stroke]="lineColor" [attr.x1]="viewboxSize / 2"
+                [attr.y1]="lineEdgeSpace" [attr.x2]="viewboxSize / 2" [attr.y2]="viewboxSize - lineEdgeSpace">
+            </line>
+            <line [attr.stroke-width]="borderWidth" [attr.stroke]="lineColor" [attr.x1]="lineEdgeSpace"
+                [attr.y1]="viewboxSize / 2" [attr.x2]="viewboxSize - lineEdgeSpace" [attr.y2]="viewboxSize / 2">
+            </line>
+        </g>
+
+        <!-- TIE FIGHTER -->
+        <g *ngIf="style === Style.TieFighter">
+            <circle stroke-linejoin="round" fill="transparent" [attr.stroke-width]="borderWidth"
+                [attr.stroke]="lineColor" [attr.r]="size / 5" [attr.cx]="viewboxSize / 2" [attr.cy]="viewboxSize / 2">
+            </circle>
+            <line [attr.stroke-width]="borderWidth" [attr.stroke]="lineColor" [attr.x1]="lineEdgeSpace"
+                [attr.y1]="lineEdgeSpace" [attr.x2]="lineEdgeSpace" [attr.y2]="viewboxSize - lineEdgeSpace">
+            </line>
+            <line [attr.stroke-width]="borderWidth" [attr.stroke]="lineColor" [attr.x1]="viewboxSize - lineEdgeSpace"
+                [attr.y1]="lineEdgeSpace" [attr.x2]="viewboxSize - lineEdgeSpace"
+                [attr.y2]="viewboxSize - lineEdgeSpace">
+            </line>
+            <line [attr.stroke-width]="borderWidth" [attr.stroke]="lineColor" [attr.x1]="lineEdgeSpace"
+                [attr.y1]="viewboxSize / 2" [attr.x2]="viewboxSize / 2 - (viewboxSize / 10) - (borderWidth / 2)"
+                [attr.y2]="viewboxSize / 2">
+            </line>
+            <line [attr.stroke-width]="borderWidth" [attr.stroke]="lineColor" [attr.x1]="viewboxSize - lineEdgeSpace"
+                [attr.y1]="viewboxSize / 2" [attr.x2]="viewboxSize / 2 + (viewboxSize / 10) + (borderWidth / 2)"
+                [attr.y2]="viewboxSize / 2">
+            </line>
+        </g>
+
+        <!-- LINE -->
+        <g *ngIf="style === Style.Line">
+            <line [attr.stroke-width]="borderWidth" [attr.stroke]="lineColor" [attr.x1]="viewboxSize / 2"
+                [attr.y1]="lineEdgeSpace" [attr.x2]="viewboxSize / 2" [attr.y2]="viewboxSize - lineEdgeSpace">
+            </line>
+        </g>
+    </svg>
+</div>

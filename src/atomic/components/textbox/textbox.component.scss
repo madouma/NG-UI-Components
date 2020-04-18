@@ -1,0 +1,122 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+:host {
+  display: flex;
+  align-items: center;
+  min-height: map-get($heights, s);
+}
+
+.h2-textbox-input-wrapper {
+  position: relative;
+
+  &:not(.h2--as-tooltip) {
+    @include control-box-margins;
+  }
+
+  h2-icon,
+  h2-spinner {
+    position: absolute;
+    top: 50%;
+    right: 2px;
+    transform: translateY(-50%) scale(.8);
+  }
+
+  h2-icon[data-icon="checkmark"] {
+    color: var(--success);
+  }
+
+  &.h2--has-icon input {
+    padding-right: 26px;
+  }
+}
+
+.h2-textbox-input,
+.h2-textbox-input-formatted {
+  appearance: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: map-get($radii, m);
+  box-sizing: border-box;
+  display: block;
+  height: map-get($heights, s);
+  line-height: 1;
+  outline: 0;
+  position: relative;
+  transition: background $speed $timing,
+              border $speed $timing,
+              box-shadow $speed $timing,
+              color $speed $timing;
+  width: 100%;
+  @include control-box-padding;
+  @include truncate-text;
+
+  // Spacing
+  @each $size, $width in $widths {
+    &.h2--#{$size} {
+      width: #{$width};
+    }
+  }
+
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  &.h2--as-tooltip {
+    background-color: transparent;
+    color: var(--primary-accent);
+    @include font-caption;
+  }
+
+  &:not(.h2--as-tooltip),
+  &.h2--as-tooltip:focus {
+    @include font-body-1;
+
+    // Colors
+    &:not(:disabled) {
+      color: var(--input);
+      background-color: var(--input-dropdown-bg);
+      border-color: var(--input-dropdown-outline);
+      @include input-glow(var(--primary-accent));
+    }
+
+    &:disabled {
+      color: var(--disabled-text);
+      background-color: var(--input-dropdown-disabled-bg);
+      border-color: var(--input-dropdown-outline);
+      cursor: not-allowed;
+    }
+
+    &:read-only {
+      color: var(--disabled);
+    }
+
+    &.h2-date-picker {
+      color: var(--input);
+    }
+
+    &.h2--hazard:not(:disabled) {
+      border-color: var(--hazard);
+      @include input-glow(var(--hazard));
+    }
+  }
+}
+
+.h2-textbox-input:focus + .h2-textbox-input-formatted {
+  display: none;
+}
+
+.h2-textbox-input-formatted {
+  pointer-events: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.h2-textbox-units {
+  color: var(--units);
+}

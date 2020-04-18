@@ -1,0 +1,112 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+$segment: 1px;
+
+.h2-line-style {
+  display: flex;
+  overflow: hidden;
+
+  @each $size, $width in $widths {
+    &.h2--#{$size} {
+      width: #{$width};
+    }
+  }
+
+  span {
+    display: block;
+    flex-shrink: 0;
+    height: 100%;
+    background-color: currentColor;
+
+    &:not(:last-child) {
+      margin-right: 3px;
+    }
+  }
+
+  &.h2--solid {
+    background-color: currentColor;
+  }
+
+  &.h2--dot {
+    span {
+      width: $segment;
+    }
+  }
+
+  &.h2--dash {
+    span {
+      width: $segment * 8;
+    }
+  }
+
+  &.h2--dash-dot {
+    span:nth-child(odd) {
+      width: $segment * 8;
+    }
+
+    span:nth-child(even) {
+      width: $segment;
+    }
+  }
+
+  &.h2--short-dash {
+    span:nth-child(3n + 1) {
+      width: $segment * 8;
+    }
+
+    span:nth-child(3n + 2),
+    span:nth-child(3n + 3) {
+      width: $segment;
+    }
+  }
+
+  &.h2--long-dash {
+    span {
+      width: $segment * 16;
+    }
+  }
+
+  &.h2--dash-dot-dot {
+    span:nth-child(3n + 1) {
+      width: $segment * 8;
+    }
+
+    span:nth-child(3n + 2),
+    span:nth-child(3n + 3) {
+      width: $segment;
+    }
+  }
+
+  &.h2--dash-long-dash {
+    span:nth-child(odd) {
+      width: $segment * 8;
+    }
+
+    span:nth-child(even) {
+      width: $segment * 16;
+    }
+  }
+}
+
+.h2-line-preview-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  /* -2px to account for border when used within a dropdown */
+  height: map-get($heights, s) - 2px;
+
+  &.h2--no-text {
+    justify-content: center;
+  }
+
+  &.h2-control-box {
+    margin-top: -5px;
+  }
+}
+
+.h2-line-preview-title {
+  color: var(--units);
+  display: block;
+}

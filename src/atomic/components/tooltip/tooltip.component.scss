@@ -1,0 +1,100 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+$h-padding: 8px;
+$v-padding: 6px;
+$arrow-width: 6px;
+$arrow-offset: $arrow-width + 12px;
+$max-width: 300px;
+$min-width: $arrow-offset * 2;
+
+.h2-tooltip {
+  display: inline-block;
+  padding: $v-padding $h-padding;
+  border-radius: map-get($radii, m);
+  max-width: $max-width;
+  min-width: $min-width;
+  color: var(--tooltip-text);
+  box-sizing: border-box;
+  @include font-body-2;
+
+  &-content {
+    display: flex;
+  }
+
+  &.h2--hazard {
+    background-color: var(--hazard);
+  }
+
+  &.h2--hazard &-arrow {
+    color: var(--hazard);
+  }
+
+  &.h2--caution {
+    background-color: var(--caution);
+  }
+
+  &.h2--caution &-arrow {
+    color: var(--caution);
+  }
+
+  &.h2--success {
+    background-color: var(--success);
+  }
+
+  &.h2--success &-arrow {
+    color: var(--success);
+  }
+
+  &.h2--info {
+    background-color: var(--info);
+  }
+
+  &.h2--info &-arrow {
+    color: var(--info);
+  }
+
+  &-arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+  }
+
+  &.h2--top &-arrow,
+  &.h2--bottom &-arrow {
+      left: $arrow-offset;
+      transform: translateX(-50%);
+  }
+
+  &.h2--top &-arrow {
+      top: calc(100% - 1px);
+      border-width: $arrow-width $arrow-width 0 $arrow-width;
+      border-top-color: currentColor;
+  }
+
+  &.h2--bottom &-arrow {
+      bottom: calc(100% - 1px);
+      border-width: 0 $arrow-width $arrow-width $arrow-width;
+      border-bottom-color: currentColor;
+  }
+
+  &.h2--left &-arrow,
+  &.h2--right &-arrow {
+      top: 50%;
+      transform: translateY(-50%);
+  }
+
+  &.h2--left &-arrow {
+      left: calc(100% - 1px);
+      border-width: $arrow-width 0 $arrow-width $arrow-width;
+      border-left-color: currentColor;
+  }
+
+  &.h2--right &-arrow {
+      right: calc(100% - 1px);
+      border-width: $arrow-width $arrow-width $arrow-width 0;
+      border-right-color: currentColor;
+  }
+}

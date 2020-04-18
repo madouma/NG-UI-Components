@@ -1,0 +1,117 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+$slider-min-height: map-get($heights, s);
+
+$track-height: 3px;
+$track-color: var(--slider-shade);
+
+$handle-height: 13px;
+$handle-width: 13px;
+$handle-border-width: 2px;
+$handle-fill-color: $track-color;
+$handle-color: var(--primary-accent);
+$handle-color-hover: var(--primary-accent-hover);
+$handle-color-active: var(--primary-accent-active);
+$handle-gap: 3px;
+
+$units-color: var(--units);
+
+$input-width: map-get($widths, xs);
+$input-height: map-get($heights, s);
+$input-horz-offset: 5px;
+$input-vert-offset: 3px;
+
+$label-min-width: $input-width - $input-horz-offset - map-get($x-spacings, m);
+
+:host {
+  display: flex;
+  align-items: center;
+  min-height: $slider-min-height;
+  ::ng-deep .noUi-target.noUi-horizontal {
+    .noUi-handle {
+      right: -16px;
+    }
+  }
+}
+
+.h2-slider-wrapper {
+  position: relative;
+  height: $track-height;
+  background-color: $track-color;
+  margin: 9px 10px 17px 17px;
+  width: 139px;
+}
+
+.h2-slider-step {
+  position: absolute;
+  top: 0;
+  height: .5em;
+  width: $track-height;
+  margin-top: -.14em;
+  margin-left: -.0625em;
+  background: $track-color;
+  cursor: pointer;
+
+  &.active {
+    background: var(--primary-accent);
+  }
+
+}
+
+.h2-slider {
+  position: relative;
+  height: inherit;
+  width: 100%;
+}
+
+.h2-slider-control {
+  height: inherit;
+  border: none;
+  box-shadow: none;
+  background-color: transparent;
+}
+
+.h2-slider-control.noUi-target ::ng-deep {
+  .noUi-origin {
+    top: 50%;
+    transition: none;
+    margin-right: 6px;
+  }
+  .noUi-connects {
+    overflow: visible;
+  }
+  >.noUi-connect {
+    top: 50%;
+    height: 3px;
+    margin-top: -0.6px;
+    transition: none;
+  }
+  .noUi-handle {
+    background-color: $handle-fill-color;
+    border: $handle-border-width solid $handle-color;
+    box-shadow: none;
+    outline: none;
+    width: $handle-width;
+    height: $handle-height;
+    top: 50%;
+    margin-top: -$handle-height / 2;
+    cursor: pointer;
+    border-radius: 10px;
+
+    &:hover, &:focus {
+      border-color: $handle-color-hover
+    }
+
+    &:active {
+      border-color: $handle-color-active;
+    }
+
+    &::before, &::after {
+      display: none;
+    }
+    .noUi-tooltip {
+      visibility: hidden;
+    }
+  }
+}

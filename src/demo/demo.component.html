@@ -1,0 +1,657 @@
+<div class="demo">
+  <h2-button text="Toggle Theme" [size]="ButtonSize.Medium" [type]="ButtonType.A" (clicked)="toggleTheme()"></h2-button>
+  <h2-button text="Open Properties" [size]="ButtonSize.Medium" [type]="ButtonType.A" (clicked)="propertiesDialogOpen = true"></h2-button>
+  <h2-button text="Open Analyze Properties" [size]="ButtonSize.Medium" [type]="ButtonType.A" (clicked)="propertiesDialogAnalyzeOpen = true"></h2-button>
+
+  <h2-button text="Show Prompt"[size]="ButtonSize.Medium" [type]="ButtonType.A" [loading]="loading" (clicked)="showPrompt()"></h2-button>
+
+  <h2-spinner></h2-spinner>
+
+  <div style="width: 300px; height: 300px; padding: 20px">
+    <h2-radial-trim [(ngModel)]="radialTrimValue" [box]="boxTrimValue" [gridInterval]="5"></h2-radial-trim>
+  </div>
+  <div style="width: 286px; height: 267px; padding: 29px 10px 0 10px">
+    <h2-box-trim [(ngModel)]="boxTrimValue" [doughnut]="radialTrimValue" [gridInterval]="5"></h2-box-trim>
+  </div>
+
+  <h2-dialog headerLabel="Analyze Properties" [enableDrag]="true" [enableResize]="true"
+             [showMaximizeIcon]="true" [(showDialog)]="propertiesDialogAnalyzeOpen">
+    <ng-container slot="dialogBody">
+      <h2-test-dialog-content></h2-test-dialog-content>
+    </ng-container>
+    <ng-container slot="dialogFooter">
+      <h2-button text="Done" [size]="ButtonSize.Medium" [type]="ButtonType.A" [wrapper]="false" (clicked)="propertiesDialogAnalyzeOpen = false"></h2-button>
+    </ng-container>
+  </h2-dialog>
+
+  <h2-dialog headerLabel="Curve Properties" [enableDrag]="true" [enableResize]="true"
+             [showMaximizeIcon]="true" [(showDialog)]="propertiesDialogOpen">
+    <ng-container slot="dialogHeaderLeft">
+      <h2-button text="Track List" [icon]="Icon.Back" [type]="ButtonType.A" [style]="ButtonStyle.Tertiary"
+                 [wrapper]="false"></h2-button>
+    </ng-container>
+    <ng-container slot="dialogBody">
+      <h2-panels-container>
+        <h2-panels-container width="30%">
+          <h2-list-panel [groups]="listPanelGroups" [actions]="listPanelActions" [config]="listPanelConfig1">
+            <ng-container slot="header">
+              <h2-panel-header-bar text="Track - 02"></h2-panel-header-bar>
+              <h2-panel-header-bar>
+                <h2-button text="Curve" [icon]="Icon.Add" [style]="ButtonStyle.Tertiary" [wrapper]="false"></h2-button>
+              </h2-panel-header-bar>
+            </ng-container>
+          </h2-list-panel>
+        </h2-panels-container>
+        <h2-panels-container width="70%">
+          <h2-content-panel>
+            <ng-container slot="header">
+              <h2-panel-header-bar text="Name of Curve">
+                <h2-button text="Delete Curve" [type]="ButtonType.A" [style]="ButtonStyle.Tertiary"
+                           [wrapper]="false"></h2-button>
+              </h2-panel-header-bar>
+              <h2-panel-header-bar></h2-panel-header-bar>
+            </ng-container>
+            <h2-properties-bar text="Curve Range" [enableCollapse]="true">
+              <h2-textbox #control label="Min" [size]="TextboxSize.XXSmall"
+                          [textAlign]="TextboxTextAlign.Right"></h2-textbox>
+              <h2-button #control [icon]="Icon.Swap" [style]="ButtonStyle.Tertiary"></h2-button>
+              <h2-textbox #control label="Max" [size]="TextboxSize.XXSmall"
+                          [textAlign]="TextboxTextAlign.Right"></h2-textbox>
+            </h2-properties-bar>
+            <h2-properties-bar text="Line Style" [enableCollapse]="true">
+              <h2-dropdown #control [size]="DDSize.XSmall" [items]="dropdownItems" [itemTemplate]="DDTemplate.LineThickness"
+                           [ngModel]="dropdownSelectedItem" accessor="value.thickness"></h2-dropdown>
+              <div class="u-ml-l"></div>
+              <h2-dropdown #control [size]="DDSize.XSmall" [items]="dropdownItems" [itemTemplate]="DDTemplate.LineThickness"
+                           [ngModel]="dropdownSelectedItem" accessor="value.thickness"></h2-dropdown>
+              <div class="u-ml-l"></div>
+              <h2-color-picker #control ngModel="#06B400"></h2-color-picker>
+            </h2-properties-bar>
+            <h2-properties-bar text="Control Points & Intersections">
+              <h2-table>
+                <h2-tr>
+                  <h2-th>Offset Well</h2-th>
+                  <h2-th>TVD (ft)</h2-th>
+                  <h2-th>X (ft)</h2-th>
+                  <h2-th>Y (ft)</h2-th>
+                  <h2-th>TVDss (ft)</h2-th>
+                </h2-tr>
+                <h2-tr>
+                  <h2-td>NYSA_Offset3</h2-td>
+                  <h2-td>10,177.00</h2-td>
+                  <h2-td>
+                    <h2-textbox value="-8,696.80"></h2-textbox>
+                  </h2-td>
+                  <h2-td>6,734.51</h2-td>
+                  <h2-td>9,993.00</h2-td>
+                </h2-tr>
+              </h2-table>
+            </h2-properties-bar>
+            <h2-properties-bar text="Smoothing" [enableCollapse]="true">
+              <!--<div class="h2-control-box">-->
+                <!--<nz-slider #control class="h2-slider h2&#45;&#45;s" [(ngModel)]="smoothing"></nz-slider>-->
+              <!--</div>-->
+              <h2-textbox [size]="TextboxSize.XXSmall" [textAlign]="TextboxTextAlign.Right"
+                          [(ngModel)]="smoothing"></h2-textbox>
+            </h2-properties-bar>
+          </h2-content-panel>
+        </h2-panels-container>
+      </h2-panels-container>
+    </ng-container>
+    <ng-container slot="dialogFooter">
+      <h2-button text="Done" [size]="ButtonSize.Medium" [type]="ButtonType.A" [wrapper]="false"></h2-button>
+    </ng-container>
+  </h2-dialog>
+
+
+
+  <!-- Panels -->
+  <br><br>
+  <h2 class="h2-font-h1">List Panels</h2>
+  <div style="width: 150px;">
+    <h2-list-panel #listPanelExample1 [groups]="listPanelGroups" [actions]="listPanelActions" [config]="listPanelConfig1">
+      <ng-container slot="header">
+        <h2-panel-header-bar text="Track - 02"></h2-panel-header-bar>
+        <h2-panel-header-bar>
+          <h2-button text="Curve" [icon]="Icon.Add" [style]="ButtonStyle.Tertiary" [wrapper]="false"></h2-button>
+        </h2-panel-header-bar>
+      </ng-container>
+    </h2-list-panel>
+  </div>
+
+  <div style="width: 150px;">
+    <h2-list-panel #listPanelExample2 [groups]="listPanelGroups" [actions]="[]" [config]="listPanelConfig2">
+      <ng-container slot="header">
+        <h2-panel-header-bar></h2-panel-header-bar>
+        <h2-panel-header-bar text="Inversion Type"></h2-panel-header-bar>
+      </ng-container>
+    </h2-list-panel>
+  </div>
+
+  <!-- List Panel with checkbox control -->
+  <div style="width: 150px;">
+    <h2-list-panel [groups]="listPanelControlGroups" [config]="listPanelConfig2" [template]="itemControlsTemplate" [selectable]="false">
+      <ng-container slot="header">
+        <h2-panel-header-bar></h2-panel-header-bar>
+        <h2-panel-header-bar text="List Panel Control"></h2-panel-header-bar>
+      </ng-container>
+    </h2-list-panel>
+  </div>
+
+  <ng-template #itemControlsTemplate let-item="item" let-group="group">
+    <label class="u-auto-distribute u-cursor-pointer">
+      <span class="h2-list-panel-label h2-font-body-2" h2RevealTruncatedText>{{item.text}}</span>
+      <div>
+        <h2-checkbox [(ngModel)]="item.data.checked" [wrapper]="false" [glow]="false"></h2-checkbox>
+      </div>
+    </label>
+  </ng-template>
+  <!-- #end List Panel with checkbox control -->
+
+  <div style="width: 400px">
+    <h2-content-panel>
+      <ng-container slot="header">
+        <h2-panel-header-bar text="Name of Curve">
+          <h2-button text="Delete Curve" [type]="ButtonType.A" [style]="ButtonStyle.Tertiary" [wrapper]="false"></h2-button>
+        </h2-panel-header-bar>
+        <h2-panel-header-bar></h2-panel-header-bar>
+      </ng-container>
+      <h2-properties-bar text="Curve Range" [enableCollapse]="true" [enableVisibilitySwitch]="true" [visible]="false" (visibilitySwitched)="log($event)">
+        <h2-textbox #control label="Min" [size]="TextboxSize.XXSmall" [textAlign]="TextboxTextAlign.Right"></h2-textbox>
+        <h2-button #control [icon]="Icon.Swap" [style]="ButtonStyle.Tertiary"></h2-button>
+        <h2-textbox #control label="Max" [size]="TextboxSize.XXSmall" [textAlign]="TextboxTextAlign.Right"></h2-textbox>
+      </h2-properties-bar>
+      <h2-properties-bar text="Line Style" [enableCollapse]="true" [enableVisibilitySwitch]="true">
+        <h2-dropdown #control [size]="DDSize.XSmall" [items]="dropdownItems" [itemTemplate]="DDTemplate.LineThickness" [ngModel]="dropdownSelectedItem" accessor="value.thickness"></h2-dropdown>
+        <div class="u-ml-l"></div>
+        <h2-dropdown #control [size]="DDSize.XSmall" [items]="dropdownItems" [itemTemplate]="DDTemplate.LineThickness" [ngModel]="dropdownSelectedItem" accessor="value.thickness"></h2-dropdown>
+        <div class="u-ml-l"></div>
+        <h2-color-picker #control ngModel="#06B400"></h2-color-picker>
+      </h2-properties-bar>
+      <h2-properties-bar text="Smoothing" [enableCollapse]="false">
+        <h2-dual-handle-slider [ngModel]="{min:10, max:30}" units="ft" [separatorMinSize]="20" label="Slider"></h2-dual-handle-slider>
+        <h2-dual-handle-slider [ngModel]="{min:10, max:40}" units="ft" [separatorMinSize]="20" label="Slider"></h2-dual-handle-slider>
+        <!--<div class="h2-control-box">-->
+          <!--<nz-slider #control class="h2-slider h2&#45;&#45;s" [(ngModel)]="smoothing"></nz-slider>-->
+        <!--</div>-->
+        <h2-textbox #control [size]="TextboxSize.XXSmall" [textAlign]="TextboxTextAlign.Right" [(ngModel)]="smoothing"></h2-textbox>
+      </h2-properties-bar>
+    </h2-content-panel>
+  </div>
+
+  <!-- Textboxes -->
+  <br><br>
+  <h2 class="h2-font-h1">Textboxes</h2>
+  <div>
+    <h2-textbox [format]="[titleCasePipe]" [size]="TextboxSize.XLarge" [(ngModel)]="textboxValue" label="Label" units="feet" errorMsg="Invalid Value" tooltip="Tooltip Message"></h2-textbox>
+  </div>
+  <div>
+    <h2-textbox [loading]="true" [size]="TextboxSize.Large" placeholder="Placholder" [(ngModel)]="textboxValue" [textAlign]="TextboxTextAlign.Right"></h2-textbox>
+  </div>
+  <div>
+    <h2-textbox [success]="true" [size]="TextboxSize.Medium" [readonly]="true" [ngModel]="textboxValue"></h2-textbox>
+  </div>
+  <div>
+    <h2-textbox [size]="TextboxSize.Small" [disabled]="true" placeholder="placholder"></h2-textbox>
+  </div>
+  <div>
+    <h2-textbox [size]="TextboxSize.XSmall"></h2-textbox>
+  </div>
+  <div>
+    <h2-textbox [size]="TextboxSize.XXSmall"></h2-textbox>
+  </div>
+  <div>
+    <h2-textbox [size]="TextboxSize.Medium" ngModel="displayAsTooltip" [displayAsTooltip]="true"></h2-textbox>
+  </div>
+
+  <!-- Dropdown -->
+  <br><br>
+  <h2 class="h2-font-h1">Dropdown</h2>
+  <div>
+    <h2-dropdown [size]="DDSize.XLarge" [items]="dropdownItems" [(ngModel)]="dropdownSelectedItem" accessor="value.thickness"></h2-dropdown>
+  </div>
+  <div>
+    <h2-dropdown [size]="DDSize.Large" [items]="dropdownItems" placeholder="Choose" [ngModel]="dropdownSelectedItem" accessor="value.thickness"></h2-dropdown>
+  </div>
+  <div>
+    <h2-dropdown [size]="DDSize.XSmall" [items]="dropdownMarkerItems" placeholder="Choose" [itemTemplate]="DDTemplate.MarkerStyle"
+                 [ngModel]="dropdownSelectedMarkerItem" accessor="value.previewStyle">
+    </h2-dropdown>
+  </div>
+  <div>
+    <h2-dropdown [size]="DDSize.Medium" [items]="dropdownItems" [itemTemplate]="testTemplate"></h2-dropdown>
+    <ng-template #testTemplate let-item="item">
+      {{item.value.thickness}}
+    </ng-template>
+  </div>
+  <div>
+    <h2-dropdown [size]="DDSize.Small" [disabled]="true" [items]="dropdownItems"></h2-dropdown>
+  </div>
+  <div>
+    <h2-dropdown [size]="DDSize.XSmall" [items]="dropdownItems" [itemTemplate]="DDTemplate.LineThickness" placeholder="placholder"></h2-dropdown>
+  </div>
+  <div>
+    <h2-dropdown [size]="DDSize.XXSmall" [items]="dropdownItems"></h2-dropdown>
+  </div>
+
+  <!-- Date picker -->
+  <br><br>
+  <h2 class="h2-font-h1">Date picker</h2>
+  <div>
+      <h2-date-picker [label]="'From'" [iconTemplate]="Icon.Calendar"></h2-date-picker>
+  </div>
+  <div>
+      <h2-date-picker [label]="'To'" [iconTemplate]="Icon.Calendar"></h2-date-picker>
+  </div>
+
+    <!-- Date range picker -->
+    <br><br>
+    <h2 class="h2-font-h1">Date picker</h2>
+    <div>
+        <h2-date-picker [label]="'Range'" [mode]="'range'" [iconTemplate]="Icon.Calendar"></h2-date-picker>
+    </div>
+
+  <!-- Switches, Checkboxes, Radios, Sliders -->
+  <br><br>
+  <h2 class="h2-font-h1">Switches, Checkboxes, Radios</h2>
+  <div>
+    <h2-checkbox [ngModel]="true"></h2-checkbox>
+  </div>
+  <div>
+    <h2-checkbox [ngModel]="false"></h2-checkbox>
+  </div>
+  <div>
+    <h2-checkbox [disabled]="true" [ngModel]="false" label="Right Pos Label" ></h2-checkbox>
+  </div>
+  <div>
+    <h2-checkbox [disabled]="true" [ngModel]="true" label="Left Pos Label" [labelPosition]="CheckboxLabelPos.Left"></h2-checkbox>
+  </div>
+  <div>
+    <h2-switch></h2-switch>
+  </div>
+  <div>
+    <h2-switch [disabled]="true" [ngModel]="true"></h2-switch>
+  </div>
+  <div>
+    <h2-switch [disabled]="true" [ngModel]="false" label="Label"></h2-switch>
+  </div>
+  <div>
+    <h2-switch [disabled]="true" [ngModel]="false"></h2-switch>
+  </div>
+  <div>
+    <h2-switch [ngModel]="false" [small]="true" label="Label"></h2-switch>
+  </div>
+  <div>
+    <h2-switch [disabled]="true" [ngModel]="false" [small]="true" [wrapper]="false"></h2-switch>
+  </div>
+
+  <!-- Dual Handle Slider -->
+  <br><br>
+  <h2 class="h2-font-h1">Dual Handle Slider</h2>
+  <div>
+    <h2-dual-handle-slider [ngModel]="{min:10, max:50}" units="ft" [separatorMinSize]="20" label="Slider"></h2-dual-handle-slider>
+  </div>
+
+    <!-- Single Handle Slider -->
+  <br><br>
+  <h2 class="h2-font-h1">Single Handle Slider</h2>
+  <div>
+    <h2-single-handle-slider label="Label"></h2-single-handle-slider>
+  </div>
+
+  <!-- Color Picker -->
+  <br><br>
+  <h2 class="h2-font-h1">Color Picker</h2>
+  <div>
+    <h2-color-picker ngModel="#06B400" [size]="CPickerSize.Medium"></h2-color-picker>
+  </div>
+  <div>
+    <h2-color-picker ngModel="#06B400" [disabled]="true"></h2-color-picker>
+  </div>
+
+  <!-- Gradient builder -->
+  <br><br>
+  <h2 class="h2-font-h1">Color Gradient Slider</h2>
+  <div>
+    <h2-resistivity-gradient-builder [map]="gradientMap"></h2-resistivity-gradient-builder>
+  </div>
+  <div>
+    <h2-color-picker ngModel="#009688" [size]="CPickerSize.XSmall" (ngModelChange)="slider.color=$event"></h2-color-picker>
+  </div>
+  <div>
+    <h2-button text="Add Node" [size]="ButtonSize.Small" [type]="ButtonType.A" [style]="ButtonStyle.Primary" (clicked)="slider.add()"></h2-button>
+  </div>
+  <div>
+    <h2-button text="Delete Node" [size]="ButtonSize.Small" [type]="ButtonType.C" [style]="ButtonStyle.Primary" (clicked)="slider.delete()" [disabled]="gradientMap.resistivityPoints.length === 2"></h2-button>
+  </div>
+
+
+  <!-- Type A Small Buttons -->
+  <br><br>
+  <h2 class="h2-font-h1">Type A: Small Buttons</h2>
+  <div>
+    <h2-button [loading]="true" text="Back" [icon]="Icon.Back" [size]="ButtonSize.Small" [type]="ButtonType.A" [style]="ButtonStyle.Primary"></h2-button>
+  </div>
+  <div>
+    <h2-button [success]="true" text="Back" [icon]="Icon.Back" [size]="ButtonSize.Small" [type]="ButtonType.A" [style]="ButtonStyle.Secondary"></h2-button>
+  </div>
+  <div>
+    <h2-button [success]="buttonSuccess2" (clicked)="buttonSuccess2 = !buttonSuccess2" text="Back" [icon]="Icon.Back" [size]="ButtonSize.Small" [type]="ButtonType.A" [style]="ButtonStyle.Tertiary"></h2-button>
+  </div>
+  <div>
+    <h2-button text="Cancel" [size]="ButtonSize.Small" [type]="ButtonType.A" [style]="ButtonStyle.Primary"></h2-button>
+  </div>
+  <div>
+    <h2-button text="Accept" [size]="ButtonSize.Small" [type]="ButtonType.A" [style]="ButtonStyle.Secondary"></h2-button>
+  </div>
+  <div>
+    <h2-button text="Delete Curve" [size]="ButtonSize.Small" [type]="ButtonType.A" [style]="ButtonStyle.Tertiary"></h2-button>
+  </div>
+  <div>
+    <h2-button text="Cancel" [size]="ButtonSize.Small" [type]="ButtonType.A" [style]="ButtonStyle.Primary" [disabled]="true"></h2-button>
+  </div>
+  <div>
+    <h2-button text="Accept" [size]="ButtonSize.Small" [type]="ButtonType.A" [style]="ButtonStyle.Secondary" [disabled]="true"></h2-button>
+  </div>
+  <div>
+    <h2-button text="Delete Curve" [size]="ButtonSize.Small" [type]="ButtonType.A" [style]="ButtonStyle.Tertiary" [disabled]="true" [loading]="true"></h2-button>
+  </div>
+
+  <!-- Type A Medium Buttons -->
+  <br><br>
+  <h2 class="h2-font-h1">Type A: Medium Buttons</h2>
+  <div>
+    <h2-button text="Back" [icon]="Icon.Back" [size]="ButtonSize.Medium" [type]="ButtonType.A" [style]="ButtonStyle.Primary"></h2-button>
+  </div>
+  <div>
+    <h2-button text="Back" [icon]="Icon.Back" [size]="ButtonSize.Medium" [type]="ButtonType.A" [style]="ButtonStyle.Secondary"></h2-button>
+  </div>
+  <div>
+    <h2-button text="Back" [icon]="Icon.Back" [size]="ButtonSize.Medium" [type]="ButtonType.A" [style]="ButtonStyle.Tertiary"></h2-button>
+  </div>
+  <div>
+    <h2-button text="Cancel" [size]="ButtonSize.Medium" [type]="ButtonType.A" [style]="ButtonStyle.Primary"></h2-button>
+  </div>
+  <div>
+    <h2-button text="Accept" [size]="ButtonSize.Medium" [type]="ButtonType.A" [style]="ButtonStyle.Secondary"></h2-button>
+  </div>
+  <div>
+    <h2-button text="Delete Curve" [size]="ButtonSize.Medium" [type]="ButtonType.A" [style]="ButtonStyle.Tertiary"></h2-button>
+  </div>
+
+  <!-- Type B Small Buttons -->
+  <br><br>
+  <h2 class="h2-font-h1">Type B: Small Buttons</h2>
+  <div>
+    <h2-button text="Back" [icon]="Icon.Back" [size]="ButtonSize.Small" [type]="ButtonType.B" [style]="ButtonStyle.Primary"></h2-button>
+  </div>
+  <div>
+    <h2-button text="Back" [icon]="Icon.Back" [size]="ButtonSize.Small" [type]="ButtonType.B" [style]="ButtonStyle.Secondary"></h2-button>
+  </div>
+  <div>
+    <h2-button text="Back" [icon]="Icon.Back" [size]="ButtonSize.Small" [type]="ButtonType.B" [style]="ButtonStyle.Tertiary"></h2-button>
+  </div>
+  <div>
+    <h2-button text="Cancel" [size]="ButtonSize.Small" [type]="ButtonType.B" [style]="ButtonStyle.Primary"></h2-button>
+  </div>
+  <div>
+    <h2-button text="Accept" [size]="ButtonSize.Small" [type]="ButtonType.B" [style]="ButtonStyle.Secondary"></h2-button>
+  </div>
+  <div>
+    <h2-button text="Delete Curve" [size]="ButtonSize.Small" [type]="ButtonType.B" [style]="ButtonStyle.Tertiary"></h2-button>
+  </div>
+
+  <!-- Type B Medium Buttons -->
+  <br><br>
+  <h2 class="h2-font-h1">Type B: Medium Buttons</h2>
+  <div>
+    <h2-button text="Back" [icon]="Icon.Back" [size]="ButtonSize.Medium" [type]="ButtonType.B" [style]="ButtonStyle.Primary"></h2-button>
+  </div>
+  <div>
+    <h2-button text="Back" [icon]="Icon.Back" [size]="ButtonSize.Medium" [type]="ButtonType.B" [style]="ButtonStyle.Secondary"></h2-button>
+  </div>
+  <div>
+    <h2-button text="Back" [icon]="Icon.Back" [size]="ButtonSize.Medium" [type]="ButtonType.B" [style]="ButtonStyle.Tertiary"></h2-button>
+  </div>
+  <div>
+    <h2-button text="Cancel" [size]="ButtonSize.Medium" [type]="ButtonType.B" [style]="ButtonStyle.Primary"></h2-button>
+  </div>
+  <div>
+    <h2-button text="Accept" [size]="ButtonSize.Medium" [type]="ButtonType.B" [style]="ButtonStyle.Secondary"></h2-button>
+  </div>
+  <div>
+    <h2-button text="Delete Curve" [size]="ButtonSize.Medium" [type]="ButtonType.B" [style]="ButtonStyle.Tertiary"></h2-button>
+  </div>
+  <div>
+    <h2-button text="Cancel" [size]="ButtonSize.Medium" [type]="ButtonType.B" [style]="ButtonStyle.Primary" [disabled]="true"></h2-button>
+  </div>
+  <div>
+    <h2-button text="Accept" [size]="ButtonSize.Medium" [type]="ButtonType.B" [style]="ButtonStyle.Secondary" [disabled]="true"></h2-button>
+  </div>
+  <div>
+    <h2-button text="Delete Curve" [size]="ButtonSize.Medium" [type]="ButtonType.B" [style]="ButtonStyle.Tertiary" [disabled]="true"></h2-button>
+  </div>
+
+  <!-- Type C Small Buttons -->
+  <br><br>
+  <h2 class="h2-font-h1">Type C: Small Buttons</h2>
+  <div>
+    <h2-button text="Back" [icon]="Icon.Back" [size]="ButtonSize.Small" [type]="ButtonType.C" [style]="ButtonStyle.Primary"></h2-button>
+  </div>
+  <div>
+    <h2-button text="Back" [icon]="Icon.Back" [size]="ButtonSize.Small" [type]="ButtonType.C" [style]="ButtonStyle.Secondary"></h2-button>
+  </div>
+  <div>
+    <h2-button text="Back" [icon]="Icon.Back" [size]="ButtonSize.Small" [type]="ButtonType.C" [style]="ButtonStyle.Tertiary"></h2-button>
+  </div>
+  <div>
+    <h2-button text="Cancel" [size]="ButtonSize.Small" [type]="ButtonType.C" [style]="ButtonStyle.Primary"></h2-button>
+  </div>
+  <div>
+    <h2-button text="Accept" [size]="ButtonSize.Small" [type]="ButtonType.C" [style]="ButtonStyle.Secondary"></h2-button>
+  </div>
+  <div>
+    <h2-button text="Delete Curve" [size]="ButtonSize.Small" [type]="ButtonType.C" [style]="ButtonStyle.Tertiary"></h2-button>
+  </div>
+  <div>
+    <h2-button text="Cancel" [size]="ButtonSize.Small" [type]="ButtonType.C" [style]="ButtonStyle.Primary" [disabled]="true"></h2-button>
+  </div>
+  <div>
+    <h2-button text="Accept" [size]="ButtonSize.Small" [type]="ButtonType.C" [style]="ButtonStyle.Secondary" [disabled]="true"></h2-button>
+  </div>
+  <div>
+    <h2-button text="Delete Curve" [size]="ButtonSize.Small" [type]="ButtonType.C" [style]="ButtonStyle.Tertiary" [disabled]="true"></h2-button>
+  </div>
+
+  <!-- Type C Medium Buttons -->
+  <br><br>
+  <h2 class="h2-font-h1">Type C: Medium Buttons</h2>
+  <div>
+    <h2-button text="Back" [icon]="Icon.Back" [size]="ButtonSize.Medium" [type]="ButtonType.C" [style]="ButtonStyle.Primary"></h2-button>
+  </div>
+  <div>
+    <h2-button text="Back" [icon]="Icon.Back" [size]="ButtonSize.Medium" [type]="ButtonType.C" [style]="ButtonStyle.Secondary"></h2-button>
+  </div>
+  <div>
+    <h2-button text="Back" [icon]="Icon.Back" [size]="ButtonSize.Medium" [type]="ButtonType.C" [style]="ButtonStyle.Tertiary"></h2-button>
+  </div>
+  <div>
+    <h2-button text="Cancel" [size]="ButtonSize.Medium" [type]="ButtonType.C" [style]="ButtonStyle.Primary"></h2-button>
+  </div>
+  <div>
+    <h2-button text="Accept" [size]="ButtonSize.Medium" [type]="ButtonType.C" [style]="ButtonStyle.Secondary"></h2-button>
+  </div>
+  <div>
+    <h2-button text="Delete Curve" [size]="ButtonSize.Medium" [type]="ButtonType.C" [style]="ButtonStyle.Tertiary"></h2-button>
+  </div>
+
+  <!-- Type H Small Buttons -->
+  <br><br>
+  <h2 class="h2-font-h1">Type H: Small Buttons</h2>
+  <div>
+    <h2-button text="Back" [icon]="Icon.Back" [size]="ButtonSize.Small" [type]="ButtonType.H" [style]="ButtonStyle.Primary"></h2-button>
+  </div>
+  <div>
+    <h2-button text="Back" [icon]="Icon.Back" [size]="ButtonSize.Small" [type]="ButtonType.H" [style]="ButtonStyle.Secondary"></h2-button>
+  </div>
+  <div>
+    <h2-button text="Back" [icon]="Icon.Back" [size]="ButtonSize.Small" [type]="ButtonType.H" [style]="ButtonStyle.Tertiary"></h2-button>
+  </div>
+  <div>
+    <h2-button text="Cancel" [size]="ButtonSize.Small" [type]="ButtonType.H" [style]="ButtonStyle.Primary"></h2-button>
+  </div>
+  <div>
+    <h2-button text="Accept" [size]="ButtonSize.Small" [type]="ButtonType.H" [style]="ButtonStyle.Secondary"></h2-button>
+  </div>
+  <div>
+    <h2-button text="Delete Curve" [size]="ButtonSize.Small" [type]="ButtonType.H" [style]="ButtonStyle.Tertiary"></h2-button>
+  </div>
+  <div>
+    <h2-button text="Cancel" [size]="ButtonSize.Small" [type]="ButtonType.H" [style]="ButtonStyle.Primary" [disabled]="true"></h2-button>
+  </div>
+  <div>
+    <h2-button text="Accept" [size]="ButtonSize.Small" [type]="ButtonType.H" [style]="ButtonStyle.Secondary" [disabled]="true"></h2-button>
+  </div>
+  <div>
+    <h2-button text="Delete Curve" [size]="ButtonSize.Small" [type]="ButtonType.H" [style]="ButtonStyle.Tertiary" [disabled]="true"></h2-button>
+  </div>
+
+  <!-- Type H Medium Buttons -->
+  <br><br>
+  <h2 class="h2-font-h1">Type H: Medium Buttons</h2>
+  <div>
+    <h2-button text="Back" [icon]="Icon.Back" [size]="ButtonSize.Medium" [type]="ButtonType.H" [style]="ButtonStyle.Primary"></h2-button>
+  </div>
+  <div>
+    <h2-button text="Back" [icon]="Icon.Back" [size]="ButtonSize.Medium" [type]="ButtonType.H" [style]="ButtonStyle.Secondary"></h2-button>
+  </div>
+  <div>
+    <h2-button text="Back" [icon]="Icon.Back" [size]="ButtonSize.Medium" [type]="ButtonType.H" [style]="ButtonStyle.Tertiary"></h2-button>
+  </div>
+  <div>
+    <h2-button text="Cancel" [size]="ButtonSize.Medium" [type]="ButtonType.H" [style]="ButtonStyle.Primary"></h2-button>
+  </div>
+  <div>
+    <h2-button text="Accept" [size]="ButtonSize.Medium" [type]="ButtonType.H" [style]="ButtonStyle.Secondary"></h2-button>
+  </div>
+  <div>
+    <h2-button text="Delete Curve" [size]="ButtonSize.Medium" [type]="ButtonType.H" [style]="ButtonStyle.Tertiary"></h2-button>
+  </div>
+
+  <!-- Icons -->
+  <br><br>
+  <h2 class="h2-font-h1">Icons</h2>
+  <div>
+    <h2-icon [icon]="Icon.Add"></h2-icon>
+  </div>
+  <div>
+    <h2-icon [icon]="Icon.Back"></h2-icon>
+  </div>
+  <div>
+    <h2-icon [icon]="Icon.Close"></h2-icon>
+  </div>
+  <div>
+    <h2-icon [icon]="Icon.ExpandDown"></h2-icon>
+  </div>
+  <div>
+    <h2-icon [icon]="Icon.Export"></h2-icon>
+  </div>
+  <div>
+    <h2-icon [icon]="Icon.Import"></h2-icon>
+  </div>
+  <div>
+    <h2-icon [icon]="Icon.Edit"></h2-icon>
+  </div>
+  <div>
+    <h2-icon [icon]="Icon.MoreOptions"></h2-icon>
+  </div>
+  <div>
+    <h2-icon [icon]="Icon.OpenExternal" tooltip="Tooltip goes here..."></h2-icon>
+  </div>
+  <div>
+    <h2-icon [icon]="Icon.Swap"></h2-icon>
+  </div>
+  <div>
+    <h2-icon [icon]="Icon.ViewDisable"></h2-icon>
+  </div>
+  <div>
+    <h2-icon [icon]="Icon.Minimize"></h2-icon>
+  </div>
+  <div>
+    <h2-icon [icon]="Icon.Delete"></h2-icon>
+  </div>
+  <div>
+    <h2-icon [icon]="Icon.Inversions"></h2-icon>
+  </div>
+  <div>
+    <h2-icon [icon]="Icon.DragAndDrop"></h2-icon>
+  </div>
+  <div>
+    <h2-icon [icon]="Icon.Question"></h2-icon>
+  </div>
+  <div>
+    <h2-icon [icon]="Icon.Settings"></h2-icon>
+  </div>
+
+  <!-- Markers -->
+  <br><br>
+  <h2 class="h2-font-h1">Markers</h2>
+  <div style="display: flex; padding-top: 10px;">
+    <h2-marker-preview
+      text="Round"
+      [size]="15"
+      [borderWidth]="2"
+      lineColor="var(--primary-accent)"
+      fillColor="var(--text-hilight)"
+      [style]="MarkerStyle.Round"
+    ></h2-marker-preview>
+    <h2-marker-preview
+      text="Square"
+      [size]="15"
+      [borderWidth]="2"
+      lineColor="var(--primary-accent)"
+      fillColor="var(--text-hilight)"
+      [style]="MarkerStyle.Square"
+    ></h2-marker-preview>
+    <h2-marker-preview
+      text="Diamond"
+      [size]="15"
+      [borderWidth]="2"
+      lineColor="var(--primary-accent)"
+      fillColor="var(--text-hilight)"
+      [style]="MarkerStyle.Diamond"
+    ></h2-marker-preview>
+    <h2-marker-preview
+      text="Triangle"
+      [size]="15"
+      [borderWidth]="2"
+      lineColor="var(--primary-accent)"
+      fillColor="var(--text-hilight)"
+      [style]="MarkerStyle.Triangle"
+    ></h2-marker-preview>
+    <h2-marker-preview
+      text="Plus"
+      [size]="15"
+      [borderWidth]="2"
+      lineColor="var(--primary-accent)"
+      fillColor="var(--text-hilight)"
+      [style]="MarkerStyle.Plus"
+    ></h2-marker-preview>
+    <h2-marker-preview
+      text="Cross"
+      [size]="15"
+      [borderWidth]="2"
+      lineColor="var(--primary-accent)"
+      fillColor="var(--text-hilight)"
+      [style]="MarkerStyle.Cross"
+    ></h2-marker-preview>
+    <h2-marker-preview
+      text="Star"
+      [size]="15"
+      [borderWidth]="2"
+      lineColor="var(--primary-accent)"
+      fillColor="var(--text-hilight)"
+      [style]="MarkerStyle.Star"
+    ></h2-marker-preview>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+<div class="h2-control-box" *ngIf="wrapper; else switchTemplate">
+  <ng-template [ngTemplateOutlet]="switchTemplate"></ng-template>
+</div>
+<ng-template #switchTemplate>
+  <label class="h2-switch-container" [class.h2--s]="small">
+    <input type="checkbox" [(ngModel)]="on" [disabled]="disabled" (ngModelChange)="onChange($event)">
+    <span class="h2-switch-control" [class.h2--initialized]="initialized"></span>
+  </label>
+</ng-template>
+<h2-label *ngIf="label" [text]="label" [align]="LabelAlign.Left"></h2-label>

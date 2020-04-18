@@ -1,0 +1,136 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+$color-box-size: 12px;
+$gap: 10px;
+$button-height: map-get($heights, s);
+
+$iconless-button-size: 19px;
+$iconless-button-border-size: 4px;
+
+:host {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.h2-color-picker {
+  &-button {
+    appearance: none;
+    border: 1px solid;
+    border-radius: map-get($radii, m);
+    color: var(--input);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-size: 0;
+    height: $button-height;
+    padding: 1px map-get($x-spacings, s);
+    line-height: 1;
+    outline: 0;
+    text-decoration: none;
+    transition: background-color $speed $timing,
+    border-color $speed $timing;
+    user-select: none;
+    white-space: nowrap;
+    @include control-box-margins;
+
+    @each $size, $width in $widths {
+      &.h2--#{$size} {
+        width: #{$width};
+      }
+    }
+
+    &.h2--without-icon {
+      width: $iconless-button-size;
+      height: $iconless-button-size;
+      padding: $iconless-button-border-size;
+      border: none;
+
+      .h2-color-picker-selected {
+        height: $iconless-button-size - $iconless-button-border-size * 2;
+      }
+    }
+
+    &:not(:disabled) {
+      background-color: var(--input-dropdown-bg);
+      border-color: var(--input-dropdown-outline);
+      @include input-glow(var(--primary-accent));
+    }
+
+    &:disabled,
+    &:disabled:hover,
+    &:disabled:focus,
+    &:disabled:active {
+      cursor: not-allowed;
+      color: var(--disabled-text);
+      background-color: var(--input-dropdown-disabled-bg);
+      border-color: var(--input-dropdown-outline);
+    }
+  }
+
+  &-selected {
+    display: block;
+    border-radius: 1px;
+    width: 100%;
+    height: $button-height - 8px;
+  }
+
+  &-icon {
+    color: var(--placeholder);
+    padding-left: 8px;
+    zoom: 70%;
+  }
+
+  &-popover {
+    background-color: var(--dialog-body);
+    border: 1px solid var(--primary-accent);
+    border-radius: map-get($radii, l);
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, .6);
+    padding: map-get($gaps, xl) map-get($gaps, xl) 0 map-get($gaps, xl);
+
+    h2-opacity-slider {
+      margin-left: map-get($x-spacings, m);
+    }
+  }
+
+  &-row {
+    display: flex;
+  }
+
+  &-palette {
+    ul {
+      display: flex;
+      justify-content: flex-start;
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+
+      &:not(:last-child) {
+        margin-bottom: map-get($gaps, xxs);
+      }
+    }
+
+    li {
+      width: $color-box-size;
+      height: $color-box-size;
+      transition: box-shadow $speed $timing;
+      cursor: pointer;
+
+      &:hover {
+        box-shadow: 0 0 0 1px var(--input);
+      }
+
+      &:not(:last-child) {
+        margin-right: map-get($gaps, xxs);
+      }
+    }
+  }
+
+  &-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: map-get($heights, m);
+  }
+}

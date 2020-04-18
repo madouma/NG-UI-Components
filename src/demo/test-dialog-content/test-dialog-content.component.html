@@ -1,0 +1,9 @@
+<h2-dialog-content [root]="dialogContent">
+  <ng-template #curvePropertiesTemplate let-item="item">
+    <h2-curve-properties [curveName]="item.text"></h2-curve-properties>
+  </ng-template>
+
+  <ng-template #surfacePropertiesTemplate let-item="item">
+    <h2-surface-properties [surfaceName]="item.text"></h2-surface-properties>
+  </ng-template>
+</h2-dialog-content>

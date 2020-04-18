@@ -1,0 +1,11 @@
+<input
+  #slider
+  class="h2-opacity-slider-input"
+  type="range"
+  min="0"
+  max="100"
+  step="1"
+  (ngModel)="value"
+  (change)="onChange(+slider.value)"
+  [ngStyle]="sliderInputStyles"
+/>

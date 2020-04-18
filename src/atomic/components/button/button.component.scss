@@ -1,0 +1,208 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+// Define colors for different button types
+$types: (a: (default: #{var(--primary-accent)},
+        hover: #{var(--primary-accent-hover)},
+        active: #{var(--primary-accent-active)},
+        text: #{var(--solid-button-text)},
+        disabled: #{var(--disabled)}),
+    b: (default: #{var(--button)},
+        hover: #{var(--button-hover)},
+        active: #{var(--button-active)},
+        text: #{var(--solid-button-text)},
+        disabled: #{var(--disabled)}),
+    c: (default: #{var(--button-c)},
+        hover: #{var(--button-c-hover)},
+        active: #{var(--button-c-active)},
+        text: #{var(--solid-button-text)},
+        disabled: #{var(--disabled)}),
+    h: (default: #{var(--button-h)},
+        hover: #{var(--button-h-hover)},
+        active: #{var(--button-h-active)},
+        text: #{var(--solid-button-text)},
+        disabled: #{var(--disabled)}),
+    hazard: (default: #{var(--hazard)},
+        hover: #{var(--hazard-hover)},
+        active: #{var(--hazard-active)},
+        text: #{var(--solid-button-text)},
+        disabled: #{var(--disabled)}),
+    caution: (default: #{var(--caution)},
+        hover: #{var(--caution-hover)},
+        active: #{var(--caution-active)},
+        text: #{var(--solid-button-text)},
+        disabled: #{var(--disabled)}),
+    success: (default: #{var(--success)},
+        hover: #{var(--success-hover)},
+        active: #{var(--success-active)},
+        text: #{var(--solid-button-text)},
+        disabled: #{var(--disabled)}),
+    info: (default: #{var(--info)},
+        hover: #{var(--info-hover)},
+        active: #{var(--info-active)},
+        text: #{var(--solid-button-text)},
+        disabled: #{var(--disabled)}));
+
+$h-padding: 11px;
+$v-padding: 0;
+
+:host {
+    display: inline-flex;
+}
+
+button {
+    position: relative;
+    appearance: none;
+    border: 1px solid;
+    border-radius: map-get($radii, m);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    line-height: 1;
+    outline: 0;
+    padding: $v-padding $h-padding;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color $speed $timing,
+        border-color $speed $timing;
+    user-select: none;
+    white-space: nowrap;
+
+
+    &:disabled {
+        cursor: not-allowed;
+    }
+
+    &.h2--loading {
+        pointer-events: none;
+    }
+
+    &.h2--type-a {
+        @include font-button-1;
+    }
+
+    &.h2--type-b {
+        @include font-button-2;
+    }
+
+    &.h2--type-c {
+        @include font-button-2;
+    }
+
+    &.h2--type-h {
+        @include font-button-2;
+    }
+
+    &.h2--tertiary {
+        padding: 0;
+    }
+
+    &:not(.h2--no-text) h2-icon {
+        // This is assuming the icon will always be placed to the left of the text
+        margin-left: -7px;
+
+        &.h2--no-highlight {
+            color: var(--button-c);
+
+            &.hover,
+            &.focus {
+                color: var(--button-c);
+            }
+        }
+    }
+
+    // Heights
+    @each $size,
+    $height in $heights {
+        &.h2--#{$size} {
+            height: $height;
+        }
+    }
+
+    // Colors
+    @each $type,
+    $color in $types {
+        &.h2--type-#{$type} {
+
+            &.h2--primary {
+                background-color: map-get($color, default);
+                border-color: map-get($color, default);
+                color: map-get($color, text);
+
+                &:hover,
+                &:focus {
+                    background-color: map-get($color, hover);
+                    border-color: map-get($color, hover);
+                }
+
+                &:active {
+                    background-color: map-get($color, active);
+                    border-color: map-get($color, active);
+                }
+
+                &[disabled] {
+                    background-color: map-get($color, disabled);
+                    border-color: map-get($color, disabled);
+                }
+            }
+
+            &.h2--secondary,
+            &.h2--tertiary {
+                background-color: transparent;
+                color: map-get($color, default);
+
+                &:hover,
+                &:focus {
+                    color: map-get($color, hover);
+                }
+
+                &:active {
+                    color: map-get($color, active);
+                }
+
+                &[disabled] {
+                    color: map-get($color, disabled);
+                }
+            }
+
+            &.h2--secondary {
+                border-color: currentColor;
+            }
+
+            &.h2--tertiary {
+                border-color: transparent;
+                box-shadow: none;
+            }
+
+            // Pulse effect color
+            &[ant-click-animating-without-extra-node]:after {
+                border-color: map-get($color, default);
+            }
+        }
+    }
+}
+
+/* button */
+
+h2-spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.h2-control-box {
+    display: inline-flex;
+    align-items: center;
+
+    >h2-icon[data-icon="checkmark"] {
+        color: var(--success);
+        transform: scale(.8);
+    }
+}
+
+.h2-custom-control-box {
+    display: inline-flex;
+    position: absolute;
+    right: 0px;
+}

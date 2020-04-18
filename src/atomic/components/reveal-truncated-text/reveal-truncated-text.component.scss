@@ -1,0 +1,15 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+$h-padding: 8px;
+$v-padding: 6px;
+$arrow-width: 6px;
+
+.h2-reveal-truncated-text {
+  display: inline-block;
+  padding: $v-padding $h-padding;
+  color: var(--input);
+  box-sizing: border-box;
+  background-color: var(--input-dropdown-bg);
+  @include font-body-2;
+}

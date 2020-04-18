@@ -1,0 +1,55 @@
+<ng-template cdkPortal #dialogPortal="cdkPortal" >
+  <div #dialogWrapper class="h2-dialog-wrapper" tabindex="-1"
+       [@dialogAnimation] (@dialogAnimation.done)="onAnimationDone()" (keyup.esc)="onEscPress()">
+    <div *ngIf="showBackdrop" class="h2-dialog-backdrop" (click)="onBackdropClick()"></div>
+    <ng-container *ngIf="enableDrag; else disableDragTemplate">
+      <div  class="h2-dialog" [class.h2--resize]="enableResize" [ngClass]="[type]" [ngStyle]="style"
+           tabindex="-1" role="dialog" #dialogCdkDrag="cdkDrag" cdkDrag
+           (cdkDragStarted)="onDragStarted($event)" (cdkDragEnded)="onDragEnded($event)">
+        <div class="h2-dialog-header" cdkDragHandle>
+          <ng-container [ngTemplateOutlet]="dialogHeaderTemplate"></ng-container>
+        </div>
+        <ng-container [ngTemplateOutlet]="dialogBodyTemplate"></ng-container>
+        <ng-container [ngTemplateOutlet]="dialogFooterTemplate"></ng-container>
+      </div>
+    </ng-container>
+    <ng-template #disableDragTemplate>
+      <div class="h2-dialog" [class.h2--resize]="enableResize" [ngClass]="[type]" [ngStyle]="style"
+           tabindex="-1" role="dialog">
+        <div class="h2-dialog-header">
+          <ng-container [ngTemplateOutlet]="dialogHeaderTemplate"></ng-container>
+        </div>
+        <ng-container [ngTemplateOutlet]="dialogBodyTemplate"></ng-container>
+        <ng-container [ngTemplateOutlet]="dialogFooterTemplate"></ng-container>
+      </div>
+    </ng-template>
+  </div>
+</ng-template>
+
+<ng-template #dialogHeaderTemplate>
+  <div class="h2-dialog-header-left u-pl-s">
+    <ng-content select="[slot='dialogHeaderLeft']"></ng-content>
+  </div>
+  <h2 class="h2-dialog-title h2-font-h1">{{headerLabel}}</h2>
+  <div class="h2-dialog-header-right u-pr-s">
+    <ng-content select="[slot='dialogHeaderRight']"></ng-content>
+    <h2-button *ngIf="showMaximizeIcon" class="u-mx-s" [type]="ButtonType.B" [style]="ButtonStyle.Tertiary" [icon]="Icon.WindowMaximize"
+               [wrapper]="false" (clicked)="maximizeDialog()">
+    </h2-button>
+    <h2-button *ngIf="showCloseIcon" class="u-mx-s" [type]="ButtonType.B" [style]="ButtonStyle.Tertiary" [icon]="Icon.Close"
+               [wrapper]="false" (clicked)="onCloseClicked()">
+    </h2-button>
+  </div>
+</ng-template>
+
+<ng-template #dialogBodyTemplate>
+  <div class="h2-dialog-body">
+    <ng-content select="[slot='dialogBody']"></ng-content>
+  </div>
+</ng-template>
+
+<ng-template #dialogFooterTemplate>
+  <div class="h2-dialog-footer">
+    <ng-content select="[slot='dialogFooter']"></ng-content>
+  </div>
+</ng-template>

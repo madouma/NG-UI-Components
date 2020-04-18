@@ -1,0 +1,135 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+:host {
+    display: block;
+    width: 100%;
+    background-color: var(--fraction-body);
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+}
+
+@each $size,
+$height in $heights {
+
+    .h2-list-panel-groups.h2--#{$size} .h2-list-panel-item,
+    .h2-list-panel-groups.h2--#{$size} .h2-list-panel-group-title {
+        height: $height;
+    }
+}
+
+.h2-list-panel-groups {
+    // TODO: update this, since this declaration assumes that all headers will have two panel-header-bars
+    max-height: calc(100% - #{map-get($heights, s) * 2});
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-color: var(--fraction-body);
+}
+
+.h2-list-panel-group {
+    &:not(.h2--no-header) .h2-list-panel-item {
+        padding: 0 map-get($x-spacings, s) 0 map-get($x-spacings, l);
+    }
+}
+
+.h2-list-panel-group-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    line-height: 1;
+    padding: 0 0 0 map-get($x-spacings, s);
+    color: var(--list-group-title);
+    @include font-subtitle;
+
+    &.h2--collapse-enabled {
+        cursor: pointer;
+    }
+
+    h2-chevron-indicator {
+        color: var(--placeholder);
+    }
+}
+
+.h2-list-panel-item {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    cursor: pointer;
+    margin: 0;
+    padding: 0 map-get($x-spacings, s) 0 map-get($x-spacings, s);
+    line-height: 1;
+    background-color: var(--fraction-body);
+    color: var(--label);
+
+
+    &:hover,
+    &:focus,
+    &:active {
+        color: var(--label);
+        background-color: var(--hover);
+
+        .h2-list-panel-action {
+            opacity: .5;
+        }
+    }
+
+    &.h2--selected {
+        background-color: var(--primary-accent);
+        color: var(--text-hilight);
+    }
+
+    &.h2--view-disabled .h2-list-panel-label {
+        opacity: .5;
+    }
+
+    .h2-list-panel-action:not(.h2--toggled):hover,
+    .h2-list-panel-action.h2--enabled,
+    &.h2--selected .h2-list-panel-action.h2--enabled {
+        color: var(--text-hilight);
+        opacity: 1;
+    }
+
+    &.h2--selected .h2-list-panel-actions.h2--enabled,
+    .h2-list-panel-actions.h2--enabled,
+    &:hover .h2-list-panel-actions,
+    &:focus .h2-list-panel-actions,
+    &:active .h2-list-panel-actions {
+        display: flex;
+    }
+
+    &.cdk-drag-placeholder {
+        background-color: var(--dialog-body);
+        color: transparent;
+
+        >* {
+            display: none;
+        }
+    }
+
+
+}
+
+.h2--left-spacing {
+    margin-left: map-get($x-spacings, l);
+}
+
+.h2-list-panel-actions {
+    display: none;
+    align-items: center;
+    margin-left: auto;
+}
+
+.h2-list-panel-action {
+    margin-left: map-get($x-spacings, s);
+    opacity: 0;
+}
+
+.h2--disable-roxclink {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}

@@ -1,0 +1,17 @@
+<h2-label [class.u-invisible]="!label" [text]="label" [align]="LabelAlign.Right"></h2-label>
+
+<div class="h2-slider-wrapper" [ngClass]="[size]">
+  <div class="h2-slider">
+    <div #slider class="h2-slider-control"></div>
+    <div class="h2-slider-center-bar"></div>
+    <h2-textbox #textbox class="h2--value" [style.left]="value + '%'" [style.width]="'60px'"
+      [ngModel]="value | number:'0.0-2' | removeChar:','" [type]="TextboxType.Number"
+      [textAlign]="TextboxTextAlign.Right" [size]="TextboxSize.XSmall" [displayAsTooltip]="true" [errorMsg]="error"
+      (keydown.esc)="textbox.blurOut()" (keydown.enter)="textbox.blurOut()" (ngModelChange)="validate($event)"
+      (blur)="updateValueViaInput($event, 'value')" [disabled]="disabled">
+    </h2-textbox>
+  </div>
+</div>
+
+<h2-label class="h2-slider-units" [class.u-invisible]="!units" [text]="units" [type]="LabelType.Units">
+</h2-label>

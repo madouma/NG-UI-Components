@@ -1,0 +1,92 @@
+@import "variables";
+
+.u-uppercase {
+  text-transform: uppercase !important;
+}
+
+.u-truncate-text {
+  @include truncate-text;
+}
+
+.u-invisible {
+  visibility: hidden !important;
+}
+
+.u-auto-distribute {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;  
+  height: 100%;  
+}
+
+.u-cursor-pointer {
+  cursor: pointer;
+}
+
+// Alignments
+$alignments: left, right, center;
+@each $alignment in $alignments {
+  .u-text-#{$alignment} {
+    text-align: #{$alignment} !important;
+  }
+}
+
+// Vertical Margin/Padding tokens
+@each $size, $spacing in $y-spacings {
+  .u-mt-#{$size} {
+    margin-top: #{$spacing} !important;
+  }
+
+  .u-mb-#{$size} {
+    margin-bottom: #{$spacing} !important;
+  }
+
+  .u-my-#{$size} {
+    margin-top: #{$spacing} !important;
+    margin-bottom: #{$spacing} !important;
+  }
+
+  .u-pt-#{$size} {
+    padding-top: #{$spacing} !important;
+  }
+
+  .u-pb-#{$size} {
+    padding-bottom: #{$spacing} !important;
+  }
+
+  .u-py-#{$size} {
+    padding-top: #{$spacing} !important;
+    padding-bottom: #{$spacing} !important;
+  }
+}
+
+// Horizontal Margin/Padding tokens
+@each $size, $spacing in $x-spacings {
+  .u-ml-#{$size} {
+    margin-left: #{$spacing} !important;
+  }
+
+  .u-mr-#{$size} {
+    margin-right: #{$spacing} !important;
+  }
+
+  .u-mx-#{$size} {
+    margin-left: #{$spacing} !important;
+    margin-right: #{$spacing} !important;
+  }
+
+  .u-pl-#{$size} {
+    padding-left: #{$spacing} !important;
+  }
+
+  .u-pr-#{$size} {
+    padding-right: #{$spacing} !important;
+  }
+
+  .u-px-#{$size} {
+    padding-left: #{$spacing} !important;
+    padding-right: #{$spacing} !important;
+  }
+}
+

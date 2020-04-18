@@ -1,0 +1,22 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+span {
+  display: inline-flex;
+  align-items: center;
+  height: map-get($heights, s);
+  @include control-box-margins;
+
+  &.h2--left {
+    margin-left: 0;
+  }
+
+  &.h2--right {
+    margin-right: 0;
+  }
+
+  &.h2--left-bottom {
+    margin-left: 0;
+    margin-bottom: 0;
+  }
+}

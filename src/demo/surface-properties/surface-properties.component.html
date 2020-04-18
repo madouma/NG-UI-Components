@@ -1,0 +1,27 @@
+<h2-content-panel>
+  <ng-container slot="header">
+    <h2-panel-header-bar></h2-panel-header-bar>
+    <h2-panel-header-bar [text]="surfaceName"></h2-panel-header-bar>
+  </ng-container>
+
+  <h2-properties-bar text="Surface Name" [enableCollapse]="true">
+    <h2-textbox [(ngModel)]="surfaceName" [size]="TextboxSize.Large"></h2-textbox>
+  </h2-properties-bar>
+
+  <h2-properties-bar text="Line Style" [enableCollapse]="true">
+    <h2-dropdown class="u-mr-l" [(ngModel)]="lineThickness" accessor="value.thickness" [size]="DDSize.XSmall" [itemTemplate]="DDTemplate.LineThickness" [items]="lineThicknessDropdown"></h2-dropdown>
+    <h2-dropdown class="u-mr-l" [(ngModel)]="lineStyle" accessor="value.style" [size]="DDSize.XSmall" [itemTemplate]="DDTemplate.Text" [items]="lineStyleDropdown"></h2-dropdown>
+    <h2-color-picker [(ngModel)]="lineColor"></h2-color-picker>
+  </h2-properties-bar>
+
+  <h2-properties-bar text="Control Points & Interactions" [enableCollapse]="true">
+    <!-- TODO: Table component -->
+  </h2-properties-bar>
+
+  <h2-properties-bar text="Variogram Properties" [enableCollapse]="true">
+    <h2-textbox class="u-mr-l" [(ngModel)]="majorAxis" label="Major Axis" units="ft" [size]="TextboxSize.XSmall"></h2-textbox>
+    <h2-textbox class="u-mr-l" [(ngModel)]="minorAxis" label="Minor Axis" units="ft" [size]="TextboxSize.XSmall"></h2-textbox>
+    <h2-textbox class="u-mr-l" [(ngModel)]="angle" label="Angle" units="ft" [size]="TextboxSize.XSmall"></h2-textbox>
+    <h2-dropdown [(ngModel)]="variogramType" label="Variogram Type" [size]="DDSize.Medium" [itemTemplate]="DDTemplate.Text" [items]="variogramTypeDropdown"></h2-dropdown>
+  </h2-properties-bar>
+</h2-content-panel>

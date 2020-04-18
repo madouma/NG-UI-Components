@@ -1,0 +1,20 @@
+<h2-dialog class="h2-prompt-dialog" [headerLabel]="title"  [showBackdrop]="true"
+           [showCloseIcon]="false" [dismissOnEscPress]="false" [(showDialog)]="showPrompt" [type]="type"
+           width="320px" minWidth="0" height="auto" minHeight="0" (closed)="onClosed()">
+  <ng-container slot="dialogHeaderLeft">
+    <!-- TODO: Select icon based on prompt type -->
+    <h2-icon [icon]="Icon.Caution"></h2-icon>
+  </ng-container>
+  <div slot="dialogBody" class="h2-prompt-body">
+    <p *ngIf="secondaryCopy" class="h2-prompt-text-secondary">{{ secondaryCopy }}</p>
+    <p *ngIf="primaryCopy" class="h2-prompt-text-primary">{{ primaryCopy }}</p>
+  </div>
+  <ng-container slot="dialogFooter">
+    <h2-button *ngIf="secondaryBtnLabel" [type]="buttonType" [style]="ButtonStyle.Secondary" [text]="secondaryBtnLabel"
+               [wrapper]="false" (clicked)="onSecondaryBtnClicked()">
+    </h2-button>
+    <h2-button *ngIf="primaryBtnLabel" [type]="buttonType" [style]="ButtonStyle.Primary" [text]="primaryBtnLabel"
+               [wrapper]="false" (clicked)="onPrimaryBtnClicked()">
+    </h2-button>
+  </ng-container>
+</h2-dialog>

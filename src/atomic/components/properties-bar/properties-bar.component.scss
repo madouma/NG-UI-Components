@@ -1,0 +1,69 @@
+@import "../../styles/variables";
+
+:host {
+    display: block;
+    background-color: var(--fraction-body);
+    margin-bottom: 2px;
+
+    // When visibility switch is enabled and off
+    &.h2--hidden {
+
+        .h2-properties-bar-text,
+        ::ng-deep h2-label {
+            opacity: .5;
+        }
+    }
+}
+
+.h2-properties-bar-header,
+.h2-properties-bar-content {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.h2-properties-bar-header {
+    color: var(--fraction-title);
+    background-color: var(--fraction-header);
+    height: map-get($heights, s);
+    justify-content: flex-end;
+    padding: 0 map-get($x-spacings, m);
+
+    &.h2--collapse-enabled {
+        cursor: pointer;
+    }
+
+    .h2-properties-bar-text {
+        margin-right: auto;
+    }
+
+    > :not(:first-child) {
+        margin-left: map-get($x-spacings, m);
+    }
+
+    >.h2--delete {
+        opacity: 0.5;
+
+        &:hover,
+        &:focus {
+            opacity: 1;
+        }
+    }
+}
+
+.h2-properties-bar-content {
+    color: var(--label);
+
+    ::ng-deep>h2-button:last-child:not([textalign="start"]) {
+        margin-left: auto;
+    }
+}
+
+h2-expand-collapse-indicator {
+    color: var(--primary-accent);
+}
+
+.h2-properties-bar-text,
+::ng-deep h2-label {
+    transition: opacity $speed $timing;
+}

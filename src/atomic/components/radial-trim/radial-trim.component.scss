@@ -1,0 +1,112 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+$handle-width: 25px;
+$handle-height: 5px;
+$handle-color: var(--primary-accent);
+$handle-color-hover: var(--primary-accent-hover);
+$handle-color-active: var(--primary-accent-active);
+$container-bg-color: var(--dialog-body);
+$grid-color: rgba(0, 0, 0, .5);
+$indicator-line: 1px dashed $handle-color;
+$radius: 6px;
+
+:host {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: $radius;
+  background-image: linear-gradient($grid-color 0, transparent 1px),
+                    linear-gradient(90deg, $grid-color 0, transparent 1px),
+                    linear-gradient($container-bg-color 0, $container-bg-color 100%);
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    border: 1px solid $container-bg-color;
+    border-radius: $radius;
+  }
+}
+
+.h2-indicator-lines {
+  position: absolute;
+  left: 50%;
+  right: 0;
+  border-top: $indicator-line;
+  border-bottom: $indicator-line;
+  margin-top: -1px;
+}
+
+.h2-circle-fill,
+.h2-circle-outline-inner,
+.h2-circle-outline-outer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+  border-radius: 100%;
+}
+
+.h2-circle-outline-inner,
+.h2-circle-outline-outer {
+  border: 1px solid $handle-color;
+}
+
+.h2-radial-trim-slider.noUi-target ::ng-deep {
+  position: absolute;
+  height: 50%;
+  width: 0;
+  top: 0;
+  left: 50%;
+  border: none;
+  z-index: 2;
+
+  .noUi-handle {
+    background-color: $handle-color;
+    border: none;
+    box-shadow: none;
+    outline: none;
+    width: $handle-width;
+    height: $handle-height;
+    left: 50%;
+    top: -$handle-height / 2;
+    margin-left: -$handle-width / 2;
+    cursor: ns-resize;
+
+    &:hover, &:focus {
+      background-color: $handle-color-hover
+    }
+
+    &:active {
+      background-color: $handle-color-active;
+    }
+
+    &::before, &::after {
+      display: none;
+    }
+  }
+
+  .noUi-connects {
+    display: none;
+  }
+
+  .noUi-connect, .noUi-origin {
+    transition: none;
+  }
+}
+
+.h2-box,
+.h2-box-fill {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}

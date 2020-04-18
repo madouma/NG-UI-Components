@@ -1,0 +1,5 @@
+@import "mixins";
+
+.h2-control-box {
+  @include control-box-margins;
+}

@@ -1,0 +1,188 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+$slider-width: 265px;
+$gradient-builder-bg-color: var(--fraction-body);
+$gradient-builder-bg-color-rgb: var(--fraction-body-rgb);
+
+$track-height: map-get($heights, xs);
+$checker-width: $track-height / 2;
+
+$handle-height: 26px;
+$handle-height-active: 30px;
+$handle-width: 5px;
+$handle-border-width: 1px;
+$handle-border-color: var(--slider-shade);
+$handle-border-color-active: var(--controls-hilight);
+
+$indicator-line-color: rgba(var(--text-hilight-rgb), .1);
+$indicator-line-color-active: var(--primary-accent);
+
+$cpicker-btn-gap: map-get($gaps, m);
+
+$grid-height: 60px;
+$grid-radius: map-get($radii, l);
+$grid-bg-color: $handle-border-color;
+$grid-line-color: rgba(0, 0, 0, .5);
+$grid-top-space: 38px;
+$grid-bottom-space: 19px + $cpicker-btn-gap * 2;
+$grid-value-color: var(--units);
+
+$input-gap: 3px;
+$input-gradient-fade-length: 10px;
+
+:host {
+  display: block;
+  padding: 10px 20px 1px 20px;
+  background-color: $gradient-builder-bg-color;
+  overflow: hidden;
+
+  ::ng-deep .noUi-target.noUi-horizontal {
+    .noUi-origin {
+      top: 50%;
+
+      &::before {
+        content: "";
+        position: absolute;
+        display: block;
+        top: 50%;
+        right: -.5px;
+        width: 0;
+        height: $grid-height;
+        transform: translateY(-50%);
+        border-left: $handle-border-width dashed $indicator-line-color;
+        background: none;
+        transition: border-color $speed $timing;
+      }
+    }
+
+    .noUi-handle {
+      width: $handle-width;
+      height: $handle-height;
+      top: 50%;
+      right: -$handle-width / 2;
+      transform: translateY(-50%);
+      border-radius: 0;
+      border: $handle-border-width solid $handle-border-color;
+      box-shadow: none;
+      outline: none;
+      box-sizing: border-box;
+      transition: border-color $speed $timing;
+      cursor: ew-resize;
+
+      &::before, &::after {
+        display: none;
+      }
+    }
+
+    .h2-slider-handle-active {
+      z-index: 100 !important;
+
+      &::before {
+        border-left-color: $indicator-line-color-active;
+      }
+
+      .noUi-handle {
+        height: $handle-height-active;
+        border-color: $handle-border-color-active;
+      }
+    }
+  }
+}
+
+.noUi-target {
+  width: $slider-width;
+  height: $track-height;
+  background: inherit;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  background-size: 100% 100%,
+    ($checker-width * 2) ($checker-width * 2),
+    ($checker-width * 2) ($checker-width * 2),
+    ($checker-width * 2) ($checker-width * 2),
+    ($checker-width * 2) ($checker-width * 2);
+  background-position: 0 0,
+    (0 0),
+    ($checker-width 0),
+    ($checker-width -#{$checker-width}),
+    (0 $checker-width);
+}
+
+.h2-grid {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: $grid-height;
+  margin-top: $grid-top-space;
+  margin-bottom: $grid-bottom-space;
+  border-radius: $grid-radius;
+  background-color: $grid-bg-color;
+}
+
+.h2-grid-line {
+  position: absolute;
+  height: 100%;
+  top: 0;
+  width: 1px;
+  background-color: $grid-line-color;
+}
+
+.h2-grid-value {
+  position: absolute;
+  bottom: 100%;
+  display: block;
+  color: $grid-value-color;
+  transform-origin: left center;
+  transform: rotate(-90deg);
+  user-select: none;
+  @include font-caption;
+}
+
+.h2-grid-linear {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.h2-current-handle-pos {
+  position: absolute;
+  height: 100%;
+  width: 0;
+}
+
+h2-color-picker {
+  position: absolute;
+  top: calc(100% + #{$cpicker-btn-gap});
+  transform: translateX(-50%);
+
+  ::ng-deep .h2-color-picker-button {
+    margin: 0 !important;
+  }
+}
+
+.h2-input-wrapper {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  display: flex;
+  align-items: flex-end;
+  transform: translateX(-50%);
+  height: $grid-top-space;
+  background: linear-gradient(
+    to right,
+    rgba($gradient-builder-bg-color-rgb, .5),
+    $gradient-builder-bg-color $input-gradient-fade-length,
+    $gradient-builder-bg-color calc(100% - #{$input-gradient-fade-length}),
+    rgba($gradient-builder-bg-color-rgb, .5)
+  );
+}
+
+h2-textbox {
+  position: relative;
+  transition: transform $speed $timing;
+
+  &:focus-within {
+    transform: translateY(-$input-gap);
+  }
+}

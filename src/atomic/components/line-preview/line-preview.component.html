@@ -1,0 +1,8 @@
+<div class="h2-line-preview-wrapper" [class.h2-control-box]="wrapper" [class.h2--no-text]="!text">
+  <span *ngIf="text" class="h2-line-preview-title h2-font-caption">{{text}}</span>
+  <div [ngClass]="['h2-line-style', 'h2--' + style, size]" [style.height]="thickness + 'px'" [style.color]="color">
+    <ng-container *ngIf="style !== LinePreviewStyle.Solid">
+      <span *ngFor="let i of lineStyleSegments"></span>
+    </ng-container>
+  </div>
+</div>

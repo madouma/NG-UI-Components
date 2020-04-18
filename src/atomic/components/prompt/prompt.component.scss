@@ -1,0 +1,42 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+$body-min-height: 36px;
+$body-padding-x: map-get($x-spacings, m);
+$body-padding-y: map-get($y-spacings, m);;
+
+h2-button ::ng-deep button {
+  min-width: 62px;
+  justify-content: center;
+}
+
+.h2-prompt-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: var(--panel-body);
+  padding: $body-padding-y $body-padding-x;
+  min-height: $body-min-height;
+
+  p {
+    @include font-body-1;
+    line-height: 1.4;
+    margin: 0;
+
+    &:not(:last-child) {
+      margin-bottom: 10px;
+    }
+
+    &:nth-child(2) {
+      margin-bottom: 20px;
+    }
+  }
+}
+
+.h2-prompt-text-primary {
+  color: var(--input);
+}
+
+.h2-prompt-text-secondary {
+  color: var(--fraction-title);
+}
