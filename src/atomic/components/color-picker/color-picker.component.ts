@@ -39,7 +39,7 @@ export class ColorPickerComponent implements ControlValueAccessor {
 
   @Output() opacityChange = new EventEmitter<number>();
 
-  @ViewChild('popover') popover: ElementRef;
+  @ViewChild('popover', {static: false}) popover: ElementRef;
 
   ButtonType = ButtonType;
   ButtonStyle = ButtonStyle;

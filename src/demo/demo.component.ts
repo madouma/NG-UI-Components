@@ -180,7 +180,7 @@ export class DemoComponent implements OnInit {
   ];
   loading = false;
 
-  @ViewChild(ResistivityGradientBuilderComponent)
+  @ViewChild(ResistivityGradientBuilderComponent, {static: false})
   public slider: ResistivityGradientBuilderComponent;
 
   constructor(private _promptService: PromptService) {

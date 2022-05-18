@@ -19,8 +19,8 @@ import { Icon } from '../../atomic/components/icon/icon.enum';
 export class TestDialogContentComponent implements OnInit {
   dialogContent: DialogContentColumn;
 
-  @ViewChild('curvePropertiesTemplate') curvePropertiesTemplate: TemplateRef<any>;
-  @ViewChild('surfacePropertiesTemplate') surfacePropertiesTemplate: TemplateRef<any>;
+  @ViewChild('curvePropertiesTemplate', {static: false}) curvePropertiesTemplate: TemplateRef<any>;
+  @ViewChild('surfacePropertiesTemplate', {static: false}) surfacePropertiesTemplate: TemplateRef<any>;
 
   ngOnInit() {
     this.dialogContent = <DialogContentColumn>{

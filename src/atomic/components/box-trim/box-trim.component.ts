@@ -49,8 +49,8 @@ export class BoxTrimComponent implements ControlValueAccessor, OnInit, OnChanges
   @Input() gridInterval = 8;
   @Input() doughnut: string;
 
-  @ViewChild('horizontalSlider') private _horizontalSlider;
-  @ViewChild('verticalSlider') private _verticalSlider;
+  @ViewChild('horizontalSlider', {static: false}) private _horizontalSlider;
+  @ViewChild('verticalSlider', {static: false}) private _verticalSlider;
 
   // Box values
   left: number = null;
@@ -75,7 +75,7 @@ export class BoxTrimComponent implements ControlValueAccessor, OnInit, OnChanges
   get bottomPercent() {
     return this.convertToPercent(this.max - this.bottom) + '%';
   }
-  
+
   get horizontalCenterPercent() {
     return this.convertToPercent((this.right - this.left) / 2 + (this.left - this.min)) + '%';
   }
@@ -104,7 +104,7 @@ export class BoxTrimComponent implements ControlValueAccessor, OnInit, OnChanges
     return this._sanitizer.bypassSecurityTrustStyle(
       `radial-gradient(
         circle closest-side,
-        transparent ${innerRadiusPercent}, 
+        transparent ${innerRadiusPercent},
         rgba(var(--primary-accent-rgb), .2) ${innerRadiusPercent},
         rgba(var(--primary-accent-rgb), .2) ${outerRadiusPercent},
         transparent ${outerRadiusPercent}
@@ -195,13 +195,13 @@ export class BoxTrimComponent implements ControlValueAccessor, OnInit, OnChanges
     this._horizontalSlider.nativeElement.noUiSlider.on('set', (stringValues, handle, values) => {
       this.left = values[0];
       this.right = values[1];
-      this._changed$.next();
+      this._changed$.next(true);
     });
 
     this._verticalSlider.nativeElement.noUiSlider.on('set', (stringValues, handle, values) => {
       this.top = values[0];
       this.bottom = values[1];
-      this._changed$.next();
+      this._changed$.next(true);
     });
   }
 

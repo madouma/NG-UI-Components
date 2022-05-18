@@ -25,8 +25,8 @@ import { TextboxSize, TextboxTexAlign, TextboxType } from '../textbox/textbox.en
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ResistivityGradientBuilderComponent implements OnInit {
-  @ViewChild('mySlider') private _slider: ElementRef;
-  @ViewChild('inputWrapper') private _inputWrapperElRef: ElementRef<HTMLElement>;
+  @ViewChild('mySlider', {static: false}) private _slider: ElementRef;
+  @ViewChild('inputWrapper', {static: false}) private _inputWrapperElRef: ElementRef<HTMLElement>;
 
   @Input() stepPercent = 5;
 

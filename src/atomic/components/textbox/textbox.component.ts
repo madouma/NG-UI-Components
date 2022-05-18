@@ -54,7 +54,7 @@ export class TextboxComponent implements ControlValueAccessor {
   @Output() focus = new EventEmitter<HTMLInputElement>();
   @Output() dateChanged = new EventEmitter<Date>();
 
-  @ViewChild('textbox') textboxInput: ElementRef<HTMLInputElement>;
+  @ViewChild('textbox', {static: false}) textboxInput: ElementRef<HTMLInputElement>;
 
   LabelType = LabelType;
   LabelAlign = LabelAlign;

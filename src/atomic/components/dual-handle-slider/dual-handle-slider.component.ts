@@ -41,7 +41,7 @@ export class DualHandleSliderComponent implements ControlValueAccessor, OnInit, 
   @Input() disabled: boolean = false;
   @Output() valueRangeChanged: EventEmitter<any> = new EventEmitter();
 
-  @ViewChild('slider') private _slider;
+  @ViewChild('slider', {static: false}) private _slider;
 
   LabelType = LabelType;
   LabelAlign = LabelAlign;

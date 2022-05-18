@@ -36,7 +36,7 @@ export class RadialTrimComponent implements ControlValueAccessor, OnInit, OnChan
   @Input() gridInterval = 8;
   @Input() box: string;
 
-  @ViewChild('slider') private _slider;
+  @ViewChild('slider', {static: false}) private _slider;
 
   innerRadius: number = null;
   outerRadius: number = null;
@@ -53,7 +53,7 @@ export class RadialTrimComponent implements ControlValueAccessor, OnInit, OnChan
     return this._sanitizer.bypassSecurityTrustStyle(
       `radial-gradient(
         circle closest-side,
-        transparent ${this.innerRadiusPercent}, 
+        transparent ${this.innerRadiusPercent},
         rgba(var(--primary-accent-rgb), .2) ${this.innerRadiusPercent},
         rgba(var(--primary-accent-rgb), .2) ${this.outerRadiusPercent},
         transparent ${this.outerRadiusPercent}
@@ -97,7 +97,7 @@ export class RadialTrimComponent implements ControlValueAccessor, OnInit, OnChan
     return this._sanitizer.bypassSecurityTrustStyle(
       `radial-gradient(
         circle closest-side,
-        transparent ${this.innerRadiusPercent}, 
+        transparent ${this.innerRadiusPercent},
         rgba(var(--primary-accent-rgb), .2) ${this.innerRadiusPercent}
       )`
     );

@@ -69,9 +69,9 @@ export class DialogComponent implements OnInit, OnDestroy {
   @Output() showDialogChange = new EventEmitter<boolean>();
   @Output() closed = new EventEmitter();
 
-  @ViewChild('dialogPortal') dialogPortal: TemplatePortal;
-  @ViewChild('dialogWrapper') dialogWrapper: ElementRef<HTMLElement>;
-  @ViewChild('dialogCdkDrag') dialogCdkDrag: CdkDrag;
+  @ViewChild('dialogPortal', {static: false}) dialogPortal: TemplatePortal;
+  @ViewChild('dialogWrapper', {static: false}) dialogWrapper: ElementRef<HTMLElement>;
+  @ViewChild('dialogCdkDrag', {static: false}) dialogCdkDrag: CdkDrag;
 
   Icon = Icon;
   ButtonType = ButtonType;

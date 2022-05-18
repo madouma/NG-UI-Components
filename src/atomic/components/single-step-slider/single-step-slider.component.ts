@@ -49,7 +49,7 @@ export class SingleStepSliderComponent implements OnInit, OnDestroy {
 
   error = '';
 
-  @ViewChild('stepSlider') private stepSlider;
+  @ViewChild('stepSlider', {static: false}) private stepSlider;
 
   constructor(private _cdf: ChangeDetectorRef) { }
   ngOnInit() {

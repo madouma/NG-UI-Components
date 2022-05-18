@@ -30,12 +30,12 @@ export class DropdownComponent implements ControlValueAccessor {
   @Input() textAlign = DDTexAlign.Left;
   @Input() label: string;
   @Input() borderless = false;
-  @ViewChild('textTemplate') textTemplate: TemplateRef<void>;
-  @ViewChild('lineThicknessTemplate') lineThicknessTemplate: TemplateRef<void>;
-  @ViewChild('lineStyleTemplate') lineStyleTemplate: TemplateRef<void>;
-  @ViewChild('markerStyleTemplate') markerStyleTemplate: TemplateRef<void>;
-  @ViewChild('commandTemplate') commandTemplate: TemplateRef<void>;
-  @ViewChild('colorGradientTemplate') colorGradientTemplate: TemplateRef<void>;
+  @ViewChild('textTemplate', {static: false}) textTemplate: TemplateRef<void>;
+  @ViewChild('lineThicknessTemplate', {static: false}) lineThicknessTemplate: TemplateRef<void>;
+  @ViewChild('lineStyleTemplate', {static: false}) lineStyleTemplate: TemplateRef<void>;
+  @ViewChild('markerStyleTemplate', {static: false}) markerStyleTemplate: TemplateRef<void>;
+  @ViewChild('commandTemplate', {static: false}) commandTemplate: TemplateRef<void>;
+  @ViewChild('colorGradientTemplate', {static: false}) colorGradientTemplate: TemplateRef<void>;
   @Input() itemTemplate: TemplateRef<void> | string = DDTemplate.Text;
   @Input() cmdTmplate = false;
   @Output() iconClicked = new EventEmitter<any>();

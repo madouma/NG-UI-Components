@@ -38,8 +38,8 @@ export class SingleHandleSliderComponent implements ControlValueAccessor, OnInit
   @Input() initialValue: number;
   @Input() startValue: number = 30;
 
-  @ViewChild('slider') private _slider;
-  @ViewChild('textbox') private _textbox: ElementRef<HTMLInputElement>;
+  @ViewChild('slider', {static: false}) private _slider;
+  @ViewChild('textbox', {static: false}) private _textbox: ElementRef<HTMLInputElement>;
 
   constructor(private _cdf: ChangeDetectorRef) { }
 
