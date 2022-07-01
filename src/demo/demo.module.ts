@@ -73,6 +73,7 @@ import { WidgetComponent } from '../atomic/components/widget/widget.component';
 import { DualHandleSliderComponent } from '../atomic/components/dual-handle-slider/dual-handle-slider.component';
 import { SingleHandleSliderComponent } from '../atomic/components/single-handle-slider/single-handle-slider.component';
 import { DatePickerComponent } from '../atomic/components/date-picker/date-picker.component';
+import { H2Module } from 'src/h2.module';
 
 @NgModule({
     declarations: [
@@ -80,58 +81,58 @@ import { DatePickerComponent } from '../atomic/components/date-picker/date-picke
         CurvePropertiesComponent,
         SurfacePropertiesComponent,
         TestDialogContentComponent,
-        // H2 Private Directives
-        ToggledDirective,
-        NumbersOnlyDirective,
-        // H2 Public Directives
-        TooltipDirective,
-        RevealTruncatedTextDirective,
-        // H2 Public Pipes
-        InvokePipe,
-        KebabCasePipe,
-        RemoveCharacterPipe,
-        SafePipe,
-        // H2 Private Components
-        ExpandCollapseIndicatorComponent,
-        ChevronIndicatorComponent,
-        PopoverComponent,
-        CollapsibleComponent,
-        // H2 Public Components
-        IconComponent,
-        ButtonComponent,
-        LabelComponent,
-        TextboxComponent,
-        SwitchComponent,
-        CheckboxComponent,
-        VisibilitySwitchComponent,
-        ColorPickerComponent,
-        DropdownComponent,
-        LinePreviewComponent,
-        MarkerPreviewComponent,
-        PropertiesBarComponent,
-        PanelHeaderBarComponent,
-        ListPanelComponent,
-        ContentPanelComponent,
-        PanelsContainerComponent,
-        DialogComponent,
-        DialogContentComponent,
-        TableComponent,
-        ThComponent,
-        TdComponent,
-        TrComponent,
-        TooltipComponent,
-        RevealTruncatedTextComponent,
-        PromptComponent,
-        OpacitySliderComponent,
-        ResistivityGradientBuilderComponent,
-        SpinnerComponent,
-        BoxTrimComponent,
-        RadialTrimComponent,
-        HeaderComponent,
-        WidgetComponent,
-        DualHandleSliderComponent,
-        SingleHandleSliderComponent,
-        DatePickerComponent
+        // // H2 Private Directives
+        // ToggledDirective,
+        // NumbersOnlyDirective,
+        // // H2 Public Directives
+        // TooltipDirective,
+        // RevealTruncatedTextDirective,
+        // // H2 Public Pipes
+        // InvokePipe,
+        // KebabCasePipe,
+        // RemoveCharacterPipe,
+        // SafePipe,
+        // // H2 Private Components
+        // ExpandCollapseIndicatorComponent,
+        // ChevronIndicatorComponent,
+        // PopoverComponent,
+        // CollapsibleComponent,
+        // // H2 Public Components
+        // IconComponent,
+        // ButtonComponent,
+        // LabelComponent,
+        // TextboxComponent,
+        // SwitchComponent,
+        // CheckboxComponent,
+        // VisibilitySwitchComponent,
+        // ColorPickerComponent,
+        // DropdownComponent,
+        // LinePreviewComponent,
+        // MarkerPreviewComponent,
+        // PropertiesBarComponent,
+        // PanelHeaderBarComponent,
+        // ListPanelComponent,
+        // ContentPanelComponent,
+        // PanelsContainerComponent,
+        // DialogComponent,
+        // DialogContentComponent,
+        // TableComponent,
+        // ThComponent,
+        // TdComponent,
+        // TrComponent,
+        // TooltipComponent,
+        // RevealTruncatedTextComponent,
+        // PromptComponent,
+        // OpacitySliderComponent,
+        // ResistivityGradientBuilderComponent,
+        // SpinnerComponent,
+        // BoxTrimComponent,
+        // RadialTrimComponent,
+        // HeaderComponent,
+        // WidgetComponent,
+        // DualHandleSliderComponent,
+        // SingleHandleSliderComponent,
+        // DatePickerComponent
     ],
     imports: [
         // H2 Dependencies
@@ -139,12 +140,13 @@ import { DatePickerComponent } from '../atomic/components/date-picker/date-picke
         FormsModule,
         HttpClientModule,
         BrowserAnimationsModule,
-        InlineSVGModule.forRoot(),
-        DragDropModule,
-        PortalModule,
-        OverlayModule,
-        InlineSVGModule,
-        FlatpickrModule.forRoot()
+        H2Module
+        // InlineSVGModule.forRoot(),
+        // DragDropModule,
+        // PortalModule,
+        // OverlayModule,
+        // InlineSVGModule,
+        // FlatpickrModule.forRoot()
     ],
     providers: [],
     bootstrap: [DemoComponent]

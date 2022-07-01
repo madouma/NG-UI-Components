@@ -31,7 +31,7 @@
               { "glob": "**/*", "input": "src/atomic/assets", "output": "/assets" }
             ],
             "styles": [
-              "node_modules/nouislider/distribute/nouislider.css",
+              "node_modules/nouislider/dist/nouislider.css",
               "src/styles.scss"
             ],
             "scripts": []

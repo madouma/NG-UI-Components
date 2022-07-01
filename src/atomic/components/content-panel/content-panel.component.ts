@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';
 
 @Component({
   selector: 'h2-content-panel',
@@ -11,4 +11,10 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 })
 export class ContentPanelComponent {
   @Input() disable = false;
+
+  @Input() width = 'none';
+
+  @HostBinding('style.max-width') get maxWidth() {
+    return this.width;
+  }
 }

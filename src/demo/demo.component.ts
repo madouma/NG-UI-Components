@@ -29,6 +29,12 @@ import { MarkerPreviewStyle } from '../atomic/components/marker-preview/marker-p
   styleUrls: ['./demo.component.scss']
 })
 export class DemoComponent implements OnInit {
+ //missing properties:
+ propertiesDialogOpen = false;
+ propertiesDialogAnalyzeOpen = false
+ smoothing;
+ buttonSuccess2: boolean;
+
   radialTrimValue = '50,100';
   boxTrimValue = '10,90,10,90';
 

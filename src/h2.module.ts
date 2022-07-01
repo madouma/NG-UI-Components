@@ -147,6 +147,12 @@ import { FlatpickrModule } from 'angularx-flatpickr';
     RevealTruncatedTextComponent
   ],
   exports: [
+    // Modules
+    DragDropModule,
+    PortalModule,
+    OverlayModule,
+    InlineSVGModule,
+    FlatpickrModule,
     // H2 Public Directives
     TooltipDirective,
     RevealTruncatedTextDirective,
